@@ -55,6 +55,12 @@ label{display:block;margin-top:12px;font-size:15px;color:var(--m)}
 input[type=text],select{width:100%;padding:10px;font-size:17px;border:1px solid #cdbf9f;border-radius:8px;background:#fff;margin:4px 0}
 .bilanz{display:flex;justify-content:space-around;text-align:center}
 .bilanz .zahl{font:46px Georgia,serif;color:var(--g);line-height:1.2}
+textarea{width:100%;padding:10px;font:16px/1.45 inherit;font-family:inherit;border:1px solid #cdbf9f;border-radius:8px;background:#fff;margin:4px 0;resize:vertical}
+.zaehler th.gibt{color:var(--rot)}
+.zaehler th.gibt::after{content:" ♦";font-size:13px}
+.zaehler td.vorn{background:var(--gold);color:var(--g);border-radius:6px}
+.geber{margin:10px 0 0;font-size:16px}
+.geber .knopf{margin:0 0 0 8px;padding:5px 12px;font-size:14px}
 .tipp{color:var(--c);opacity:.85;font-size:15px;text-align:center;margin:22px 8px 0;line-height:1.5}
 .fuss{text-align:center;color:var(--gold);opacity:.7;letter-spacing:.5em;margin-top:30px}
 </style>
@@ -118,8 +124,18 @@ function spielSeite(id) {
     <div class="hinweis"><b>Karten:</b> ${g.aussortieren}</div>
     ${g.abschnitte.map(([t, h]) => `<h3>${t}</h3>${h}`).join('')}
   </article>
+  <section class="karte"><h2>Eure Hausregeln</h2>
+    <p class="meta">Was ihr anders spielt, hier notieren. Es wird automatisch auf diesem Handy gespeichert.</p>
+    <textarea id="hr" rows="4" placeholder="Zum Beispiel: Bei uns darf man mit einem Buben ausgehen.">${esc(LS.get('hausregeln', {})[g.id] || '')}</textarea>
+    <div class="meta" id="hr-ok">&nbsp;</div></section>
   <a class="knopf" href="#/zaehler/${g.id}">Punkte zählen</a>
   <a class="knopf leise" href="#/">Zurück zur Übersicht</a>`;
+  $('#hr').oninput = e => {
+    const r = LS.get('hausregeln', {});
+    if (e.target.value.trim()) r[g.id] = e.target.value; else delete r[g.id];
+    LS.set('hausregeln', r);
+    $('#hr-ok').textContent = 'Gespeichert';
+  };
 }
 
 function bilanz() {
@@ -129,7 +145,8 @@ function bilanz() {
     <button class="knopf klein" data-b="${i}" data-d="1">+1</button><button class="knopf klein leise" data-b="${i}" data-d="-1">−1</button></div>`).join('')}</div>
   <div class="hinweis"><b>Wo wird gespeichert?</b> Punktestand und Ehe-Bilanz liegen nur auf diesem Handy, nicht auf dem des anderen. Zählt deshalb am besten immer mit demselben Handy.
   ${istApp ? ' Wer die App vom Startbildschirm entfernt, löscht damit auch den Stand.'
-    : `<br>Legt die Seite auf den Startbildschirm und öffnet sie von dort: auf dem iPhone über das Teilen-Symbol und „Zum Home-Bildschirm“, bei Android über das Menü ⋮ und „Zum Startbildschirm hinzufügen“. Im Browser kann der Stand verloren gehen, etwa wenn Browserdaten gelöscht werden oder Safari die Seite eine Woche nicht sieht. Auf dem iPhone sind Browser und Startbildschirm außerdem getrennt: Was im Browser gezählt wurde, taucht in der App nicht auf.`}</div></section>`;
+    : `<br>Legt die Seite auf den Startbildschirm und öffnet sie von dort: auf dem iPhone über das Teilen-Symbol und „Zum Home-Bildschirm“, bei Android über das Menü ⋮ und „Zum Startbildschirm hinzufügen“. Im Browser kann der Stand verloren gehen, etwa wenn Browserdaten gelöscht werden oder Safari die Seite eine Woche nicht sieht. Auf dem iPhone sind Browser und Startbildschirm außerdem getrennt: Was im Browser gezählt wurde, taucht in der App nicht auf.`}</div>
+  <a class="knopf klein leise" href="#/sicherung">Sicherung erstellen oder einspielen</a></section>`;
 }
 
 function setup(vorwahl) {
@@ -139,7 +156,8 @@ function setup(vorwahl) {
   <section class="karte"><h2>Neue Partie</h2>
     <label>Spiel</label><select id="sp"><option value="">Freie Partie</option>${sortiert().map(g =>
       `<option value="${g.id}"${g.id === vorwahl ? ' selected' : ''}>${g.name}</option>`).join('')}</select>
-    <label>Spieler oder Teams (leere Felder fallen weg)</label>
+    <label>Spieler oder Teams</label>
+    <p class="meta">Bitte in Sitzreihenfolge im Uhrzeigersinn eintragen, wer zuerst gibt, steht oben. Dann zeigt der Zähler in jeder Runde, wer gibt. Leere Felder fallen weg. Bei Teams passt die Geberanzeige nicht, dann einfach ignorieren.</p>
     ${namen.map((n, i) => `<input type="text" class="nm" value="${esc(n)}" placeholder="Name ${i + 1}">`).join('')}
     <button class="knopf" id="los">Partie starten</button>
     ${z ? `<a class="knopf leise" href="#/zaehler">Laufende Partie fortsetzen</a>` : ''}
@@ -155,22 +173,29 @@ function setup(vorwahl) {
       if (!confirm(frage)) return;
     }
     LS.set('namen', roh);
-    LS.set('partie', { spiel: $('#sp').value, spieler, runden: [] });
+    LS.set('partie', { spiel: $('#sp').value, spieler, runden: [], geber: 0 });
     geh('#/zaehler');
   };
 }
 
 function partie(z) {
   const g = finde(z.spiel);
+  const n = z.spieler.length;
   const summe = z.spieler.map((_, i) => z.runden.reduce((s, r) => s + (Number(r[i]) || 0), 0));
+  const weniger = g && g.wenigerGewinnt;
+  const beste = z.runden.length ? (weniger ? Math.min(...summe) : Math.max(...summe)) : null;
+  const geber = ((z.geber || 0) + z.runden.length) % n;
   app.innerHTML = `<a class="zurueck" href="${g ? '#/spiel/' + g.id : '#/'}">‹ ${g ? g.name : 'Alle Spiele'}</a>
   <section class="karte"><h2>${g ? g.name : 'Freie Partie'}</h2>
     ${g && g.zaehlerHinweis ? `<div class="hinweis">${g.zaehlerHinweis}</div>` : ''}
-    <table class="zaehler"><thead><tr><th></th>${z.spieler.map(n => `<th>${esc(n)}</th>`).join('')}</tr></thead><tbody>
+    <div class="geber">Runde ${z.runden.length + 1} · Es gibt: <b>${esc(z.spieler[geber])}</b>
+      <button class="knopf klein leise" id="gw">Anderer Geber</button></div>
+    <table class="zaehler"><thead><tr><th></th>${z.spieler.map((s, i) => `<th${i === geber ? ' class="gibt"' : ''}>${esc(s)}</th>`).join('')}</tr></thead><tbody>
     ${z.runden.map((r, k) => `<tr><td class="meta">${k + 1}</td>${r.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}
-    <tr class="summe"><td>Σ</td>${summe.map(s => `<td>${s}</td>`).join('')}</tr>
+    <tr class="summe"><td>Σ</td>${summe.map(s => `<td${s === beste ? ' class="vorn"' : ''}>${s === beste ? '★ ' : ''}${s}</td>`).join('')}</tr>
     <tr><td></td>${z.spieler.map(() => `<td><input type="number" class="ein" placeholder="0"></td>`).join('')}</tr>
     </tbody></table>
+    ${z.runden.length ? `<p class="meta">★ führt. ${weniger ? 'Bei diesem Spiel gewinnt die niedrigste Summe.' : 'Gewertet wird die höchste Summe.'}</p>` : ''}
     <button class="knopf" id="ein">Runde eintragen</button>
     ${z.runden.length ? `<button class="knopf klein leise" id="undo">Letzte Runde löschen</button>` : ''}
     <a class="knopf klein leise" href="#/neu">Neue Partie</a>
@@ -183,12 +208,70 @@ function partie(z) {
   };
   const u = $('#undo');
   if (u) u.onclick = () => { if (confirm('Letzte Runde löschen?')) { z.runden.pop(); LS.set('partie', z); route(); } };
+  $('#gw').onclick = () => { z.geber = ((z.geber || 0) + 1) % n; LS.set('partie', z); route(); };
 }
+
+const SCHLUESSEL = ['partie', 'bilanz', 'namen', 'hausregeln'];
+function sicherung() {
+  const daten = {};
+  SCHLUESSEL.forEach(k => { const v = LS.get(k, null); if (v !== null) daten[k] = v; });
+  const code = 'SPIELEABEND1:' + btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(daten))));
+  app.innerHTML = `<a class="zurueck" href="#/zaehler">‹ Punktezähler</a>
+  <section class="karte"><h2>Sicherung</h2>
+    <p>Die Sicherung enthält Ehe-Bilanz, laufende Partie, Namen und eure Hausregeln. Schickt sie euch zum Beispiel per Mail oder Messenger. Auf einem neuen Handy fügt ihr sie unten wieder ein.</p>
+    <h3>Sicherung erstellen</h3>
+    <textarea id="code" rows="4" readonly>${code}</textarea>
+    <button class="knopf" id="raus">${navigator.share ? 'Sicherung teilen' : 'Sicherung kopieren'}</button>
+    <div class="meta" id="ok">&nbsp;</div>
+    <h3>Sicherung einspielen</h3>
+    <p class="meta">Achtung: Der aktuelle Stand auf diesem Handy wird dabei ersetzt.</p>
+    <textarea id="rein" rows="4" placeholder="Sicherung hier einfügen"></textarea>
+    <button class="knopf leise" id="laden">Sicherung einspielen</button>
+  </section>`;
+  $('#raus').onclick = async () => {
+    try {
+      if (navigator.share) await navigator.share({ title: 'Sicherung Spieleabend', text: code });
+      else { await navigator.clipboard.writeText(code); $('#ok').textContent = 'Kopiert.'; }
+    } catch (e) {
+      if (e && e.name === 'AbortError') return;
+      $('#code').select(); $('#ok').textContent = 'Bitte den markierten Text kopieren.';
+    }
+  };
+  $('#laden').onclick = () => {
+    const t = $('#rein').value.replace(/\s+/g, '');
+    let daten;
+    try {
+      if (!t.startsWith('SPIELEABEND1:')) throw new Error();
+      daten = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(t.slice(13)), c => c.charCodeAt(0))));
+    } catch (e) { alert('Das sieht nicht nach einer gültigen Sicherung aus.'); return; }
+    if (!confirm('Aktuellen Stand auf diesem Handy durch die Sicherung ersetzen?')) return;
+    SCHLUESSEL.forEach(k => { if (k in daten) LS.set(k, daten[k]); else localStorage.removeItem(k); });
+    alert('Sicherung eingespielt.');
+    geh('#/zaehler');
+  };
+}
+
+// Bildschirm anlassen, solange eine Anleitung oder der Zähler offen ist
+let sperre = null, wachBleiben = false;
+async function wach(an) {
+  wachBleiben = an;
+  if (!('wakeLock' in navigator)) return;
+  try {
+    if (an && !sperre && document.visibilityState === 'visible') {
+      sperre = await navigator.wakeLock.request('screen');
+      sperre.addEventListener('release', () => { sperre = null; });
+      if (!wachBleiben) { sperre.release(); }
+    } else if (!an && sperre) { await sperre.release(); }
+  } catch (e) {}
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') wach(wachBleiben); });
 
 function route() {
   const h = location.hash.replace(/^#\/?/, '').split('/');
   const z = LS.get('partie', null);
+  wach(['spiel', 'zaehler', 'neu'].includes(h[0]));
   if (h[0] === 'spiel') spielSeite(h[1]);
+  else if (h[0] === 'sicherung') sicherung();
   else if (h[0] === 'neu') setup(null);
   else if (h[0] === 'zaehler') {
     if (h[1]) { if (z && z.spiel === h[1]) partie(z); else setup(h[1]); }

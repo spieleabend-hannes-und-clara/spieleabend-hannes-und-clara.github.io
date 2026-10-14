@@ -18,7 +18,8 @@ const SPIELE = [
   id: 'mau-mau', name: 'Mau Mau', min: 2, max: 6, dauer: '10 bis 20 Min.', art: 'Ablegespiel', deck: '32 Karten',
   kurz: 'Der Klassiker: Karten nach Farbe oder Wert ablegen und als Erstes alle loswerden.',
   aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Ab fünf Spielern alle 52 Karten nehmen.',
-  zaehlerHinweis: 'Wer nicht gewinnt, schreibt den Wert seiner Restkarten als Minuspunkte auf (Bube 20, Ass 11, Zahlen nach Augen, König 4, Dame 3).',
+  zaehlerHinweis: 'Wer nicht gewinnt, trägt den Wert seiner Restkarten ein (Bube 20, Ass 11, Zahlen nach Augen, König 4, Dame 3). Die niedrigste Summe gewinnt.',
+  wenigerGewinnt: true,
   abschnitte: [
     ['Ziel', '<p>Als Erstes alle Handkarten ablegen.</p>'],
     ['Vorbereitung', '<p>Jeder bekommt 5 Karten. Der Rest liegt verdeckt als Stapel in der Mitte, die oberste Karte wird daneben offen hingelegt.</p>'],
@@ -108,7 +109,8 @@ const SPIELE = [
   id: 'durak', name: 'Durak', min: 2, max: 6, dauer: '15 bis 30 Min.', art: 'Angriffsspiel', deck: '36 Karten',
   kurz: 'Das russische Kultspiel: angreifen, verteidigen, nachlegen. Wer am Ende Karten hat, ist der Durak, der Dummkopf.',
   aussortieren: 'Aus einem Deck die 2 bis 5 und die Joker entfernen. Es bleiben 6 bis Ass.',
-  zaehlerHinweis: 'Wer Durak wird, bekommt 1 Punkt, alle anderen 0. Die höchste Summe zeigt, wer am häufigsten Durak war.',
+  zaehlerHinweis: 'Wer Durak wird, bekommt 1 Punkt, alle anderen 0. Die höchste Summe zeigt, wer am häufigsten Durak war. Markiert ist, wer am seltensten Durak wurde.',
+  wenigerGewinnt: true,
   abschnitte: [
     ['Ziel', '<p>Seine Karten loswerden. Es gibt keinen Gewinner, nur einen Verlierer: Wer als Letzter noch Karten hat, ist der Durak.</p>'],
     ['Vorbereitung', `<p>Jeder bekommt 6 Karten. Die nächste Karte wird offen aufgedeckt, ihre Farbe ist Trumpf. Sie kommt quer unter den Stapel und wird als letzte gezogen.</p>
@@ -208,6 +210,7 @@ const SPIELE = [
   kurz: 'Karten zu Sätzen und Folgen kombinieren, auslegen und als Erstes alle loswerden.',
   aussortieren: 'Zwei ganze Decks mit allen Jokern zusammenmischen.',
   zaehlerHinweis: 'Nach jeder Runde die Restkarten als Punkte eintragen. Wer nach der vereinbarten Rundenzahl die wenigsten hat, gewinnt.',
+  wenigerGewinnt: true,
   abschnitte: [
     ['Ziel', '<p>Als Erstes alle Karten in Kombinationen auslegen oder ablegen.</p>'],
     ['Kombinationen', `<ul>

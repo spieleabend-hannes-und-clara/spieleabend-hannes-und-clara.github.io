@@ -308,6 +308,129 @@ const SPIELE = [
       <li>Wer sein letztes Leben verliert, „schwimmt“ und darf noch mitspielen. Verliert er noch einmal, ist er raus.</li></ul>`],
     ['Variante', '<p><b>Feuer:</b> Drei Asse auf der Hand beenden die Runde sofort. Alle anderen verlieren ein Leben.</p>']
   ]
+},
+
+{
+  id: 'speed', name: 'Speed', min: 2, max: 2, dauer: '5 Min.', art: 'Reaktionsspiel', deck: '52 Karten',
+  kurz: 'Keiner wartet auf den anderen: Beide legen gleichzeitig so schnell wie möglich ab.',
+  aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
+  zaehler: false,
+  abschnitte: [
+    ['Ziel', '<p>Als Erstes alle eigenen Karten loswerden. Es gibt keine Reihenfolge, beide spielen gleichzeitig.</p>'],
+    ['Vorbereitung', `<ul>
+      <li>Jeder bekommt 20 Karten als verdeckten Nachziehstapel und nimmt davon 5 auf die Hand.</li>
+      <li>In die Mitte kommen zwei verdeckte Ersatzstapel zu je 5 Karten und dazwischen zwei Plätze für offene Karten.</li>
+      <li>Auf „Los“ dreht jeder gleichzeitig die oberste Karte eines Ersatzstapels auf einen der beiden Plätze.</li></ul>`],
+    ['Ablauf', `<ul>
+      <li>Man darf eine Karte auf einen der beiden offenen Stapel legen, wenn sie genau eins höher oder niedriger ist. Auf eine 8 passt also 7 oder 9.</li>
+      <li>Das Ass passt an König und an 2. Die Farbe spielt keine Rolle.</li>
+      <li>Man legt immer nur eine Karte auf einmal und füllt seine Hand aus dem eigenen Nachziehstapel wieder auf 5 auf.</li>
+      <li>Kommen beide nicht weiter, drehen beide gleichzeitig wieder je eine Karte von den Ersatzstapeln auf.</li>
+      <li>Sind die Ersatzstapel leer, werden die beiden offenen Stapel gemischt und neu als Ersatzstapel ausgelegt.</li></ul>`],
+    ['Spielende', '<p>Wer keine Hand- und keine Nachziehkarten mehr hat, schlägt auf den Tisch und gewinnt.</p>']
+  ]
+},
+
+{
+  id: 'cribbage', name: 'Cribbage', min: 2, max: 2, dauer: '30 bis 45 Min.', art: 'Kombinationsspiel', deck: '52 Karten',
+  kurz: 'Der englische Klassiker: Fünfzehner, Paare und Folgen zählen, bis einer 121 Punkte hat. Ideal für zwei.',
+  aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker. Statt eines Cribbage-Bretts zählt der Punktezähler.',
+  zaehlerHinweis: 'Punkte jeweils sofort eintragen, wenn sie entstehen. Wer zuerst 121 erreicht, gewinnt, auch mitten in der Runde.',
+  abschnitte: [
+    ['Ziel', '<p>Als Erstes 121 Punkte sammeln. Punkte gibt es während des Legens und beim Zählen der Hand.</p>'],
+    ['Werte', '<p>Ass 1, Zahlen nach Augen, Bildkarten 10. Für Folgen gilt die Reihenfolge Ass, 2 bis 10, Bube, Dame, König.</p>'],
+    ['Vorbereitung', `<ul>
+      <li>Jeder bekommt 6 Karten und legt 2 davon verdeckt ab. Diese 4 Karten bilden die „Crib“, sie gehört dem Geber.</li>
+      <li>Der Nicht-Geber hebt ab, der Geber deckt die oberste Karte des Stapels auf. Diese „Startkarte“ zählt später für alle Hände mit. Ist sie ein Bube, bekommt der Geber sofort 2 Punkte.</li></ul>`],
+    ['Legen', `<p>Abwechselnd legt jeder eine Karte vor sich und nennt die laufende Summe beider Spieler. Die Summe darf 31 nicht überschreiten. Punkte gibt es für:</p>
+      <ul><li>Summe genau 15: 2 Punkte. Summe genau 31: 2 Punkte.</li>
+      <li>Gleicher Wert wie die Karte davor: Paar 2, Drilling 6, Vierling 12.</li>
+      <li>Die letzten gelegten Karten bilden eine Folge (in beliebiger Reihenfolge): 1 Punkt pro Karte, ab 3 Karten.</li></ul>
+      <p>Wer nicht legen kann, ohne über 31 zu kommen, sagt „Go“. Der andere legt weiter, solange er kann. Die letzte Karte bringt 1 Punkt. Dann beginnt die Summe wieder bei 0.</p>`],
+    ['Zählen', `<p>Zuerst zählt der Nicht-Geber, dann der Geber seine Hand, dann der Geber die Crib. Zur Hand gehört immer die Startkarte dazu.</p>
+      <ul><li>Jede Kombination mit der Summe 15: 2 Punkte</li>
+      <li>Jedes Paar: 2 Punkte</li>
+      <li>Jede Folge ab 3 Karten: 1 Punkt pro Karte</li>
+      <li>4 Handkarten in einer Farbe: 4 Punkte, mit passender Startkarte 5. In der Crib zählt nur die volle Farbe mit 5.</li>
+      <li>Bube in der Farbe der Startkarte: 1 Punkt</li></ul>
+      <p class="meta">Beispiel: 5, 5, 10, König und Startkarte 5. Fünfzehner: 5+10 dreimal, 5+König dreimal, 5+5+5 einmal, ergibt 14 Punkte. Drilling: 6 Punkte. Zusammen 20.</p>`],
+    ['Geben', '<p>Der Geber wechselt jede Runde.</p>']
+  ]
+},
+
+{
+  id: 'stiche-ansagen', name: 'Stiche ansagen', min: 3, max: 6, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '52 Karten',
+  kurz: 'Wie Wizard, nur mit normalen Karten: Jede Runde vorhersagen, wie viele Stiche man genau macht.',
+  aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
+  zaehlerHinweis: 'Richtig angesagt: 20 plus 10 je Stich. Daneben: minus 10 je Stich Abweichung.',
+  abschnitte: [
+    ['Ziel', '<p>In jeder Runde genau so viele Stiche machen, wie man angesagt hat. Nicht mehr und nicht weniger.</p>'],
+    ['Runden', '<p>In der ersten Runde bekommt jeder 1 Karte, in der zweiten 2, und so weiter bis 10. Wer möchte, zählt danach wieder herunter bis 1.</p>'],
+    ['Trumpf', '<p>Nach dem Geben wird die nächste Karte aufgedeckt. Ihre Farbe ist Trumpf. Ist keine Karte mehr übrig, gibt es keinen Trumpf.</p>'],
+    ['Ansagen', '<p>Links vom Geber beginnend sagt jeder, wie viele Stiche er machen wird. Der Geber sagt zuletzt an. Er darf keine Zahl nennen, bei der die Summe aller Ansagen genau die Zahl der Stiche ergibt. So geht nie für alle die Rechnung auf.</p>'],
+    ['Ablauf', `<ul>
+      <li>Links vom Geber spielt aus. Reihenfolge: Ass, König, Dame, Bube, 10 bis 2.</li>
+      <li>Bedienpflicht: Wer die Farbe hat, muss sie zugeben. Sonst darf man trumpfen oder abwerfen.</li>
+      <li>Den Stich gewinnt der höchste Trumpf, sonst die höchste Karte der ausgespielten Farbe. Wer sticht, spielt aus.</li>
+      <li>Der Geber wechselt jede Runde im Uhrzeigersinn.</li></ul>`],
+    ['Wertung', `<ul>
+      <li>Genau getroffen: 20 Punkte plus 10 je Stich. Wer 0 ansagt und keinen Stich macht, bekommt also 20.</li>
+      <li>Daneben: 10 Punkte Abzug je Stich Abweichung.</li></ul>`]
+  ]
+},
+
+{
+  id: 'poker', name: 'Poker', min: 2, max: 9, dauer: 'beliebig', art: 'Bluffspiel', deck: '52 Karten',
+  kurz: 'Texas Hold’em: zwei eigene Karten, fünf gemeinsame, und die Frage, wer blufft.',
+  aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker. Dazu Spielgeld, zum Beispiel Chips, Streichhölzer oder Gummibärchen.',
+  zaehler: false,
+  abschnitte: [
+    ['Ziel', '<p>Den Einsatz in der Mitte gewinnen: mit der besten Hand am Schluss oder indem alle anderen vorher aussteigen.</p>'],
+    ['Rangfolge der Hände', `<p>Gewertet werden die besten 5 Karten aus den 2 eigenen und den 5 gemeinsamen. Von hoch nach niedrig:</p>
+      <ol><li>Royal Flush: Ass, König, Dame, Bube, 10 einer Farbe</li>
+      <li>Straight Flush: 5 aufeinanderfolgende Karten einer Farbe</li>
+      <li>Vierling: 4 gleiche Werte</li>
+      <li>Full House: Drilling und Paar</li>
+      <li>Flush: 5 Karten einer Farbe</li>
+      <li>Straße: 5 aufeinanderfolgende Karten</li>
+      <li>Drilling: 3 gleiche Werte</li>
+      <li>Zwei Paare</li>
+      <li>Ein Paar</li>
+      <li>Höchste Karte</li></ol>`],
+    ['Vorbereitung', '<p>Jeder bekommt gleich viel Spielgeld. Ein Spieler ist Geber, das wechselt jede Runde im Uhrzeigersinn. Links von ihm setzt einer den kleinen Pflichteinsatz (Small Blind, zum Beispiel 1), der Nächste den großen (Big Blind, zum Beispiel 2).</p>'],
+    ['Ablauf einer Runde', `<ol>
+      <li>Jeder bekommt 2 verdeckte Karten. Erste Setzrunde, links vom Big Blind beginnend.</li>
+      <li><b>Flop:</b> 3 gemeinsame Karten offen in die Mitte. Setzrunde.</li>
+      <li><b>Turn:</b> eine vierte Karte. Setzrunde.</li>
+      <li><b>River:</b> eine fünfte Karte. Letzte Setzrunde.</li>
+      <li><b>Showdown:</b> Wer noch dabei ist, deckt auf. Die beste Hand gewinnt den Pot, bei Gleichstand wird geteilt.</li></ol>`],
+    ['In einer Setzrunde', `<ul>
+      <li><b>Schieben (Check):</b> nichts setzen, solange noch niemand gesetzt hat.</li>
+      <li><b>Setzen (Bet)</b> oder <b>Erhöhen (Raise)</b></li>
+      <li><b>Mitgehen (Call):</b> den aktuellen Einsatz bezahlen.</li>
+      <li><b>Aussteigen (Fold):</b> Karten weglegen, Gesetztes ist verloren.</li></ul>
+      <p>Die Runde endet, wenn alle Verbliebenen gleich viel gesetzt haben.</p>`]
+  ]
+},
+
+{
+  id: 'siebzehn-und-vier', name: '17 und 4', min: 2, max: 7, dauer: 'beliebig', art: 'Glücksspiel', deck: '32 Karten',
+  kurz: 'So nah wie möglich an 21 heran, ohne darüber zu kommen. Die deutsche Urform von Black Jack.',
+  aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Dazu Spielgeld, zum Beispiel Chips oder Gummibärchen.',
+  zaehler: false,
+  abschnitte: [
+    ['Ziel', '<p>Mit seinen Karten näher an 21 Punkte kommen als die Bank, ohne 21 zu überschreiten.</p>'],
+    ['Werte', '<p>Ass 11, König 4, Dame 3, Bube 2, Zahlen nach Augen. Zwei Asse zählen als 21.</p>'],
+    ['Ablauf', `<ul>
+      <li>Ein Spieler ist die Bank. Jeder andere setzt einen Einsatz und bekommt eine verdeckte Karte.</li>
+      <li>Reihum fragt jeder bei der Bank weitere Karten an, bis er zufrieden ist. Wer über 21 kommt, deckt auf und hat verloren.</li>
+      <li>Zum Schluss zieht die Bank für sich so lange, wie sie möchte.</li></ul>`],
+    ['Abrechnung', `<ul>
+      <li>Kommt die Bank über 21, zahlt sie allen, die noch im Spiel sind, ihren Einsatz.</li>
+      <li>Sonst vergleicht sie mit jedem Spieler: Wer mehr hat, bekommt seinen Einsatz von der Bank. Bei Gleichstand oder weniger gewinnt die Bank.</li>
+      <li>Die Bank wechselt nach jeder Runde oder wenn jemand genau 21 hat.</li></ul>`],
+    ['Variante Black Jack', '<p>Mit 52 Karten: Bildkarten zählen 10, das Ass 1 oder 11. Jeder bekommt zwei Karten, die Bank muss bis 16 ziehen und ab 17 stehen bleiben. Ass und Bildkarte als erste zwei Karten sind ein Black Jack und werden 3 zu 2 ausgezahlt.</p>']
+  ]
 }
 
 ];

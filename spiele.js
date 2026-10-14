@@ -174,6 +174,140 @@ const SPIELE = [
     ['Spielende', '<p>Wer seine letzte Karte gelegt hat und nicht erfolgreich angezweifelt wird, gewinnt.</p>'],
     ['Variante', '<p>Die Werte steigen der Reihe nach: Der Erste legt Asse, der Nächste Zweien, dann Dreien und so weiter. So muss jeder irgendwann lügen.</p>']
   ]
+},
+
+{
+  id: 'doppelkopf', name: 'Doppelkopf', min: 4, max: 4, dauer: 'ab 60 Min.', art: 'Stichspiel', deck: '48 Karten (2 Decks)',
+  kurz: 'Zwei gegen zwei, aber wer zusammenspielt, ist anfangs geheim. Die beiden Kreuz-Damen verraten es.',
+  aussortieren: 'Aus zwei Decks jeweils die 2 bis 8 und die Joker entfernen. Jede Karte von 9 bis Ass gibt es dann doppelt.',
+  zaehlerHinweis: 'Jeder Spieler bekommt die Spielpunkte als Plus (Gewinner) oder Minus (Verlierer). Bei einem Solo zählt der Solist dreifach.',
+  abschnitte: [
+    ['Ziel', '<p>Die Spieler mit den beiden Kreuz-Damen bilden die Partei „Re“, die anderen beiden „Kontra“. Wer zu wem gehört, zeigt sich erst im Spiel. Re braucht 121 der 240 Augen, Kontra gewinnt schon mit 120.</p>'],
+    ['Kartenwerte', `<table><tr><th>Karte</th><td>Ass</td><td>10</td><td>König</td><td>Dame</td><td>Bube</td><td>9</td></tr>
+      <tr><th>Augen</th><td>11</td><td>10</td><td>4</td><td>3</td><td>2</td><td>0</td></tr></table>`],
+    ['Trumpf', `<p>Von hoch nach niedrig, jede Karte gibt es zweimal:</p>
+      <ol><li>Herz-10 („Dulle“)</li><li>Damen: Kreuz, Pik, Herz, Karo</li><li>Buben: Kreuz, Pik, Herz, Karo</li><li>Karo: Ass, 10, König, 9</li></ol>
+      <p>Die übrigen Farben (Kreuz, Pik, Herz) heißen Fehl. Dort gilt: Ass, 10, König, 9. In Herz fehlt die 10, sie ist Trumpf. Liegen zwei gleiche Karten im Stich, gewinnt die zuerst gespielte.</p>`],
+    ['Ablauf', `<ul>
+      <li>Jeder bekommt 12 Karten. Links vom Geber spielt aus.</li>
+      <li>Bedienpflicht: Wird Trumpf gespielt, muss man Trumpf zugeben. Wird eine Fehlfarbe gespielt, muss man diese Farbe zugeben. Wer nicht kann, darf trumpfen oder abwerfen.</li>
+      <li>Wer sticht, spielt als Nächstes aus.</li></ul>`],
+    ['Ansagen', `<p>Wer sich sicher ist, sagt „Re“ oder „Kontra“, bevor er seine zweite Karte spielt. Damit gibt er seine Partei preis und erhöht den Wert des Spiels. Danach kann man „keine 90“, „keine 60“, „keine 30“ oder „schwarz“ ansagen. Wer eine Ansage nicht schafft, verliert.</p>`],
+    ['Wertung', `<p>Die Gewinner bekommen pro Kopf so viele Punkte, die Verlierer ebenso viele Minuspunkte:</p>
+      <ul><li>Gewonnen: 1</li>
+      <li>Gegner unter 90 Augen: +1, unter 60: +1, unter 30: +1, ohne Stich: +1</li>
+      <li>Re oder Kontra angesagt: je +2. Jede weitere Ansage zählt +1.</li>
+      <li>Kontra gewinnt („gegen die Alten“): +1</li>
+      <li>Sonderpunkte: ein Stich mit mindestens 40 Augen („Doppelkopf“) +1, ein Karo-Ass der Gegner gefangen („Fuchs“) +1, der letzte Stich mit einem Kreuz-Buben („Karlchen“) +1</li></ul>`],
+    ['Sonderfälle', `<ul>
+      <li><b>Hochzeit:</b> Wer beide Kreuz-Damen hat, kann „Hochzeit“ ansagen. Wer von den anderen den ersten Stich macht, wird sein Partner. Ohne Ansage spielt er still allein.</li>
+      <li><b>Solo:</b> Ein Spieler spielt allein gegen drei. Bei Damensolo sind nur Damen Trumpf, bei Bubensolo nur Buben, beim Fleischlosen gar nichts. Beim Farbsolo ist eine Farbe Trumpf, dazu die Damen, Buben und Herz-10.</li></ul>`]
+  ]
+},
+
+{
+  id: 'romme', name: 'Rommé', min: 2, max: 6, dauer: '30 bis 60 Min.', art: 'Legespiel', deck: '2 Decks mit Joker',
+  kurz: 'Karten zu Sätzen und Folgen kombinieren, auslegen und als Erstes alle loswerden.',
+  aussortieren: 'Zwei ganze Decks mit allen Jokern zusammenmischen.',
+  zaehlerHinweis: 'Nach jeder Runde die Restkarten als Punkte eintragen. Wer nach der vereinbarten Rundenzahl die wenigsten hat, gewinnt.',
+  abschnitte: [
+    ['Ziel', '<p>Als Erstes alle Karten in Kombinationen auslegen oder ablegen.</p>'],
+    ['Kombinationen', `<ul>
+      <li><b>Satz:</b> 3 oder 4 Karten mit gleichem Wert in verschiedenen Farben, zum Beispiel drei Könige.</li>
+      <li><b>Folge:</b> mindestens 3 aufeinanderfolgende Karten einer Farbe, zum Beispiel Herz 7, 8, 9. Das Ass darf vor der 2 oder nach dem König stehen, aber nicht dazwischen.</li>
+      <li><b>Joker</b> ersetzen jede beliebige Karte.</li></ul>`],
+    ['Vorbereitung', '<p>Jeder bekommt 13 Karten, der Spieler links vom Geber 14. Der Rest liegt verdeckt als Stapel bereit.</p>'],
+    ['Ablauf', `<ul>
+      <li>Der Spieler mit 14 Karten beginnt und legt gleich eine Karte offen ab. Danach gilt für jeden Zug:</li>
+      <li>1. Eine Karte ziehen, vom Stapel oder die oberste offene Karte.</li>
+      <li>2. Wer möchte, legt Kombinationen aus oder legt an fremde und eigene Kombinationen an.</li>
+      <li>3. Eine Karte offen ablegen.</li></ul>`],
+    ['Erstes Auslegen', `<p>Beim ersten Mal müssen die ausgelegten Kombinationen zusammen mindestens 30 Punkte wert sein. Erst danach darf man anlegen.</p>
+      <p class="meta">Werte: Ass 11 (in der Folge A, 2, 3 nur 1), Bildkarten 10, Zahlen nach Augen, Joker so viel wie die ersetzte Karte.</p>
+      <p>Wer schon ausgelegt hat, darf einen ausliegenden Joker gegen die passende echte Karte tauschen und ihn selbst verwenden.</p>`],
+    ['Wertung', `<p>Die Runde endet, wenn jemand seine letzte Karte loswird. Die anderen zählen ihre Restkarten als Minuspunkte: Joker 20, Ass 11, Bildkarten 10, Zahlen nach Augen.</p>
+      <p>Wer alle Karten auf einmal auslegt, ohne vorher etwas ausgelegt zu haben, macht „Hand-Rommé“: Die Minuspunkte der anderen verdoppeln sich.</p>`]
+  ]
+},
+
+{
+  id: 'gin-romme', name: 'Gin Rommé', min: 2, max: 2, dauer: '20 bis 40 Min.', art: 'Legespiel', deck: '52 Karten',
+  kurz: 'Das schnelle Rommé für zwei: Hand sortieren, im richtigen Moment klopfen und den Gegner überraschen.',
+  aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
+  zaehlerHinweis: 'Nach jeder Runde die Punkte des Gewinners eintragen. Wer zuerst 100 Punkte hat, gewinnt.',
+  abschnitte: [
+    ['Ziel', '<p>Möglichst viele Karten zu Kombinationen ordnen und die restlichen, ungebundenen Karten klein halten.</p>'],
+    ['Kombinationen und Werte', `<ul>
+      <li><b>Satz:</b> 3 oder 4 Karten mit gleichem Wert.</li>
+      <li><b>Folge:</b> mindestens 3 aufeinanderfolgende Karten einer Farbe. Das Ass ist immer die niedrigste Karte.</li>
+      <li>Werte: Bildkarten 10, Ass 1, Zahlen nach Augen.</li></ul>
+      <p>Kombinationen bleiben auf der Hand, ausgelegt wird erst am Ende.</p>`],
+    ['Ablauf', `<ul>
+      <li>Jeder bekommt 10 Karten. Die nächste Karte wird offen hingelegt, der Rest ist der Stapel.</li>
+      <li>Der Nicht-Geber beginnt. In jedem Zug zieht man eine Karte, vom Stapel oder die oberste offene Karte, und legt dann eine Karte offen ab.</li></ul>`],
+    ['Klopfen', `<p>Sind die ungebundenen Karten höchstens 10 Punkte wert, darf man nach dem Ziehen klopfen. Man legt eine Karte ab und deckt seine Hand auf, geordnet nach Kombinationen.</p>
+      <p>Der Gegner legt seine Kombinationen ebenfalls aus. Seine ungebundenen Karten darf er an die Kombinationen des Klopfenden anlegen, dann zählen sie nicht.</p>
+      <p>Hat man gar keine ungebundenen Karten, ist das ein <b>Gin</b>. Dann darf der Gegner nichts anlegen.</p>`],
+    ['Wertung', `<ul>
+      <li>Klopfen: Der Klopfende bekommt die Differenz der ungebundenen Karten.</li>
+      <li>Hat der Gegner gleich viel oder weniger, gewinnt er die Runde: Er bekommt die Differenz plus 25.</li>
+      <li>Gin: 25 plus der Wert der ungebundenen Karten des Gegners.</li>
+      <li>Liegen nur noch 2 Karten im Stapel und keiner hat geklopft, zählt die Runde nicht.</li></ul>`]
+  ]
+},
+
+{
+  id: 'canasta', name: 'Canasta', min: 4, max: 4, dauer: '1 bis 2 Std.', art: 'Legespiel', deck: '2 Decks mit 4 Jokern',
+  kurz: 'Das Teamspiel für lange Abende: gleiche Karten sammeln, Canastas bauen und den Ablagestapel erobern.',
+  aussortieren: 'Zwei ganze Decks mit insgesamt 4 Jokern (108 Karten).',
+  zaehlerHinweis: 'Zwei Spalten anlegen, eine pro Team. Wer zuerst 5000 Punkte erreicht, gewinnt.',
+  abschnitte: [
+    ['Ziel', '<p>Zwei Teams, die Partner sitzen sich gegenüber. Man legt Karten mit gleichem Wert aus und versucht, Canastas aus 7 Karten zu bilden. Wer zuerst 5000 Punkte hat, gewinnt.</p>'],
+    ['Besondere Karten', `<ul>
+      <li><b>Joker und 2:</b> Sie sind wild und ersetzen jede Karte.</li>
+      <li><b>Rote 3:</b> Sie wird sofort offen vor sich gelegt und durch eine neue Karte ersetzt. Bringt 100 Punkte.</li>
+      <li><b>Schwarze 3:</b> Wer sie ablegt, sperrt den Ablagestapel für den Nächsten. Auslegen darf man sie nur beim Ausmachen.</li></ul>
+      <p class="meta">Werte: Joker 50, Ass und 2 je 20, König bis 8 je 10, 7 bis 4 und schwarze 3 je 5.</p>`],
+    ['Ablauf', `<ul>
+      <li>Jeder bekommt 11 Karten. Eine Karte liegt offen als Ablagestapel daneben.</li>
+      <li>In jedem Zug: eine Karte vom Stapel ziehen oder den ganzen Ablagestapel nehmen, dann auslegen und zum Schluss eine Karte ablegen.</li>
+      <li>Eine Meldung besteht aus mindestens 3 Karten gleichen Werts, davon mindestens 2 echte Karten und höchstens 3 wilde.</li>
+      <li>Man darf an eigene Meldungen und an die des Partners anlegen.</li></ul>`],
+    ['Erste Meldung', `<p>Die erste Meldung eines Teams braucht einen Mindestwert, abhängig vom bisherigen Punktestand:</p>
+      <table><tr><th>Stand</th><td>unter 0</td><td>0 bis 1495</td><td>1500 bis 2995</td><td>ab 3000</td></tr>
+      <tr><th>Mindestens</th><td>15</td><td>50</td><td>90</td><td>120</td></tr></table>`],
+    ['Ablagestapel nehmen', `<p>Man muss die oberste Karte sofort verwenden, entweder zusammen mit zwei passenden echten Karten aus der Hand oder durch Anlegen an eine eigene Meldung. Dann bekommt man den ganzen Stapel.</p>
+      <p>Liegt im Stapel eine wilde Karte oder hat das eigene Team noch nichts gemeldet, ist er eingefroren. Dann geht es nur mit zwei passenden echten Karten aus der Hand.</p>`],
+    ['Ausmachen und Wertung', `<ul>
+      <li>Ausmachen darf ein Team erst, wenn es mindestens ein Canasta hat. Wer ausmacht, beendet die Runde.</li>
+      <li>Canasta ohne wilde Karten: 500, mit wilden Karten: 300.</li>
+      <li>Ausmachen: +100, alles auf einmal aus der Hand: +200.</li>
+      <li>Dazu kommen die Werte aller ausgelegten Karten. Karten, die noch auf der Hand sind, werden abgezogen.</li></ul>`]
+  ]
+},
+
+{
+  id: 'schwimmen', name: 'Schwimmen', min: 3, max: 9, dauer: '15 bis 30 Min.', art: 'Tauschspiel', deck: '32 Karten',
+  kurz: 'Karten aus der Mitte tauschen, bis man 31 Punkte in einer Farbe hat. Wer zu wenig hat, verliert ein Leben.',
+  aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Jeder braucht dazu 3 Leben, zum Beispiel Streichhölzer oder Münzen.',
+  zaehler: false,
+  abschnitte: [
+    ['Ziel', '<p>Möglichst viele Punkte in einer Farbe auf der Hand haben. Wer am Ende einer Runde die wenigsten hat, verliert ein Leben. Wer zuletzt übrig bleibt, gewinnt.</p>'],
+    ['Werte', `<ul><li>Ass 11, Bildkarten 10, Zahlen nach Augen.</li>
+      <li>Es zählen nur Karten derselben Farbe. Höchstes Blatt: 31 (Ass und zwei Bildkarten oder 10 einer Farbe).</li>
+      <li>Drei Karten mit gleichem Wert zählen 30,5.</li></ul>`],
+    ['Vorbereitung', '<p>Jeder bekommt 3 Karten, der Geber zwei Päckchen zu je 3 Karten. Er sieht sich eines an und entscheidet, ob er es behält. Das andere kommt offen in die Mitte.</p>'],
+    ['Ablauf', `<p>Links vom Geber geht es los. Wer dran ist, macht genau eins:</p>
+      <ul><li>eine Karte mit der Mitte tauschen,</li>
+      <li>alle drei Karten mit der Mitte tauschen,</li>
+      <li>schieben, also nichts tun. Schieben alle hintereinander, kommen die Mittelkarten weg und drei neue vom Stapel offen hin.</li>
+      <li>klopfen: Jeder andere hat noch genau einen Zug, dann decken alle auf.</li></ul>
+      <p>Wer 31 auf der Hand hat, deckt sofort auf. Die Runde endet.</p>`],
+    ['Leben', `<ul><li>Nach dem Aufdecken verliert der Spieler mit den wenigsten Punkten ein Leben.</li>
+      <li>Hat jemand 31 aufgedeckt, verlieren alle anderen ein Leben.</li>
+      <li>Wer sein letztes Leben verliert, „schwimmt“ und darf noch mitspielen. Verliert er noch einmal, ist er raus.</li></ul>`],
+    ['Variante', '<p><b>Feuer:</b> Drei Asse auf der Hand beenden die Runde sofort. Alle anderen verlieren ein Leben.</p>']
+  ]
 }
 
 ];

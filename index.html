@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#123d2b">
+<title>Spieleabend</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Spieleabend">
+<style>
+:root{--g:#123d2b;--c:#f7f1e3;--c2:#ebe0c5;--gold:#c8a45a;--rot:#a3271f;--t:#262421;--m:#6b6457}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;color:var(--t);background:radial-gradient(ellipse at top,#1f6446 0%,var(--g) 55%,#0b2a1d 100%) fixed;font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:680px;margin:0 auto;padding:max(12px,env(safe-area-inset-top)) 14px 40px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:normal}
+.kopf{text-align:center;color:var(--c);padding:26px 8px 10px}
+.kopf .farben{color:var(--gold);letter-spacing:.5em;font-size:20px;padding-left:.5em}
+.kopf h1{font-size:42px;margin:4px 0 0;letter-spacing:.02em}
+.kopf .paar{color:var(--gold);font:italic 21px Georgia,serif}
+.kopf .datum{opacity:.8;font-size:15px;margin-top:2px}
+.karte{display:block;background:var(--c);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 6px 18px rgba(0,0,0,.28);border:1px solid rgba(200,164,90,.6);color:inherit;text-decoration:none}
+.karte h2{margin:0 0 6px;font-size:25px;color:var(--g)}
+.karte h3{font-size:20px;margin:22px 0 6px;color:var(--g);border-bottom:1px solid var(--c2);padding-bottom:3px}
+.karte p{margin:.5em 0}
+.widmung{font-family:Georgia,serif;font-size:18px}
+.widmung .von{text-align:right;font-style:italic}
+.label{color:var(--c);font-size:14px;margin:24px 4px 8px;text-transform:uppercase;letter-spacing:.14em;opacity:.85}
+.chips{display:flex;gap:8px}
+.chip{flex:1;padding:10px 0;border-radius:999px;border:1px solid var(--gold);background:transparent;color:var(--c);font-size:17px;cursor:pointer}
+.chip.an{background:var(--gold);color:var(--g);font-weight:600}
+.knopf{display:block;width:100%;padding:15px;border:0;border-radius:14px;background:var(--gold);color:var(--g);font:20px Georgia,serif;cursor:pointer;margin-top:14px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:center;text-decoration:none}
+.knopf.leise{background:transparent;color:var(--c);border:1px solid var(--gold);box-shadow:none;font-size:17px}
+.karte .knopf.leise{color:var(--g)}
+.knopf.klein{display:inline-block;width:auto;padding:9px 16px;font-size:16px;margin:8px 6px 0 0;box-shadow:none}
+.meta{color:var(--m);font-size:14px}
+.zufall{animation:auf .5s ease-out}
+@keyframes auf{from{transform:perspective(600px) rotateY(90deg);opacity:0}to{transform:none;opacity:1}}
+.zurueck{color:var(--c);text-decoration:none;display:inline-block;padding:12px 4px 0;font-size:16px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.tag{background:var(--c2);border-radius:6px;padding:2px 9px;font-size:14px;color:var(--g)}
+.hinweis{background:#fff8e6;border-left:4px solid var(--gold);padding:10px 12px;border-radius:6px;margin:12px 0;font-size:16px}
+ul,ol{padding-left:22px;margin:.4em 0}
+li{margin:4px 0}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+td,th{border-bottom:1px solid var(--c2);padding:6px 4px;text-align:left;vertical-align:top}
+.zaehler th,.zaehler td{text-align:center}
+.zaehler input{width:100%;min-width:0;padding:8px 2px;font-size:17px;text-align:center;border:1px solid #cdbf9f;border-radius:8px;background:#fff}
+.zaehler .summe td{font-weight:700;border-top:2px solid var(--g);font-size:18px}
+label{display:block;margin-top:12px;font-size:15px;color:var(--m)}
+input[type=text],select{width:100%;padding:10px;font-size:17px;border:1px solid #cdbf9f;border-radius:8px;background:#fff;margin:4px 0}
+.bilanz{display:flex;justify-content:space-around;text-align:center}
+.bilanz .zahl{font:46px Georgia,serif;color:var(--g);line-height:1.2}
+.fuss{text-align:center;color:var(--gold);opacity:.7;letter-spacing:.5em;margin-top:30px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script src="spiele.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const app = $('#app');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS = {
+  get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v === null ? d : v; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+const spielerText = g => g.min === g.max ? g.min + ' Spieler' : g.min + ' bis ' + g.max + ' Spieler';
+const passt = (g, n) => !n || (n === 5 ? g.max >= 5 : g.min <= n && g.max >= n);
+const sortiert = () => [...SPIELE].sort((a, b) => a.name.localeCompare(b.name, 'de'));
+const finde = id => SPIELE.find(g => g.id === id);
+const geh = h => { if (location.hash === h) route(); else location.hash = h; };
+let anzahl = LS.get('anzahl', 0);
+let letzter = null;
+
+function start() {
+  const liste = sortiert().filter(g => passt(g, anzahl));
+  app.innerHTML = `
+  <header class="kopf"><div class="farben">♠♥♣♦</div><h1>Spieleabend</h1>
+    <div class="paar">${esc(CONFIG.paar)}</div>${CONFIG.datum ? `<div class="datum">${esc(CONFIG.datum)}</div>` : ''}</header>
+  <section class="karte widmung">${CONFIG.widmung}<p class="von">${esc(CONFIG.von)}</p></section>
+  <div class="label">Wie viele spielen mit?</div>
+  <div class="chips">${[[0, 'Alle'], [2, '2'], [3, '3'], [4, '4'], [5, '5+']].map(([n, t]) =>
+    `<button class="chip${n === anzahl ? ' an' : ''}" data-n="${n}">${t}</button>`).join('')}</div>
+  <button class="knopf" id="zufall">Was spielen wir heute?</button>
+  <div id="vorschlag"></div>
+  <div class="label">${liste.length} Spiele</div>
+  ${liste.map(g => `<a class="karte" href="#/spiel/${g.id}"><h2>${g.name}</h2>
+    <div class="meta">${spielerText(g)} · ${g.dauer} · ${g.art}</div><p>${g.kurz}</p></a>`).join('')}
+  <a class="knopf leise" href="#/zaehler">Punktezähler und Ehe-Bilanz</a>
+  <div class="fuss">♠♥♣♦</div>`;
+  app.querySelectorAll('.chip').forEach(b => b.onclick = () => { anzahl = +b.dataset.n; LS.set('anzahl', anzahl); start(); });
+  $('#zufall').onclick = () => {
+    const pool = liste.length > 1 ? liste.filter(g => g.id !== letzter) : liste;
+    if (!pool.length) return;
+    const g = pool[Math.floor(Math.random() * pool.length)];
+    letzter = g.id;
+    $('#vorschlag').innerHTML = `<div class="karte zufall"><div class="meta">Heute spielt ihr</div><h2>${g.name}</h2>
+      <div class="meta">${spielerText(g)} · ${g.dauer}</div><p>${g.kurz}</p>
+      <a class="knopf klein" href="#/spiel/${g.id}">Zur Anleitung</a></div>`;
+  };
+}
+
+function spielSeite(id) {
+  const g = finde(id);
+  if (!g) return start();
+  app.innerHTML = `<a class="zurueck" href="#/">‹ Alle Spiele</a>
+  <article class="karte"><h2>${g.name}</h2>
+    <div class="tags"><span class="tag">${spielerText(g)}</span><span class="tag">${g.dauer}</span><span class="tag">${g.art}</span><span class="tag">${g.deck}</span></div>
+    <p>${g.kurz}</p>
+    <div class="hinweis"><b>Karten:</b> ${g.aussortieren}</div>
+    ${g.abschnitte.map(([t, h]) => `<h3>${t}</h3>${h}`).join('')}
+  </article>
+  ${g.zaehler !== false ? `<a class="knopf" href="#/zaehler/${g.id}">Punkte zählen</a>` : ''}
+  <a class="knopf leise" href="#/">Zurück zur Übersicht</a>`;
+}
+
+function bilanz() {
+  const b = LS.get('bilanz', [0, 0]);
+  return `<section class="karte"><h2>Ehe-Bilanz</h2><p class="meta">Wer gewinnt öfter? Nach jeder Partie den Sieg eintragen.</p>
+  <div class="bilanz">${CONFIG.bilanz.map((n, i) => `<div><div class="zahl">${b[i]}</div><div>${esc(n)}</div>
+    <button class="knopf klein" data-b="${i}" data-d="1">+1</button><button class="knopf klein leise" data-b="${i}" data-d="-1">−1</button></div>`).join('')}</div></section>`;
+}
+
+function setup(vorwahl) {
+  const z = LS.get('partie', null);
+  const namen = LS.get('namen', [CONFIG.bilanz[0], CONFIG.bilanz[1], '', '', '', '']);
+  app.innerHTML = `<a class="zurueck" href="#/">‹ Alle Spiele</a>
+  <section class="karte"><h2>Neue Partie</h2>
+    <label>Spiel</label><select id="sp"><option value="">Freie Partie</option>${sortiert().filter(g => g.zaehler !== false).map(g =>
+      `<option value="${g.id}"${g.id === vorwahl ? ' selected' : ''}>${g.name}</option>`).join('')}</select>
+    <label>Spieler oder Teams (leere Felder fallen weg)</label>
+    ${namen.map((n, i) => `<input type="text" class="nm" value="${esc(n)}" placeholder="Name ${i + 1}">`).join('')}
+    <button class="knopf" id="los">Partie starten</button>
+    ${z ? `<a class="knopf leise" href="#/zaehler">Laufende Partie fortsetzen</a>` : ''}
+  </section>${bilanz()}`;
+  $('#los').onclick = () => {
+    const roh = [...app.querySelectorAll('.nm')].map(i => i.value.trim());
+    const spieler = roh.filter(Boolean);
+    if (spieler.length < 2) { alert('Bitte mindestens zwei Namen eintragen.'); return; }
+    LS.set('namen', roh);
+    LS.set('partie', { spiel: $('#sp').value, spieler, runden: [] });
+    geh('#/zaehler');
+  };
+}
+
+function partie(z) {
+  const g = finde(z.spiel);
+  const summe = z.spieler.map((_, i) => z.runden.reduce((s, r) => s + (Number(r[i]) || 0), 0));
+  app.innerHTML = `<a class="zurueck" href="${g ? '#/spiel/' + g.id : '#/'}">‹ ${g ? g.name : 'Alle Spiele'}</a>
+  <section class="karte"><h2>${g ? g.name : 'Freie Partie'}</h2>
+    ${g && g.zaehlerHinweis ? `<div class="hinweis">${g.zaehlerHinweis}</div>` : ''}
+    <table class="zaehler"><thead><tr><th></th>${z.spieler.map(n => `<th>${esc(n)}</th>`).join('')}</tr></thead><tbody>
+    ${z.runden.map((r, k) => `<tr><td class="meta">${k + 1}</td>${r.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}
+    <tr class="summe"><td>Σ</td>${summe.map(s => `<td>${s}</td>`).join('')}</tr>
+    <tr><td></td>${z.spieler.map(() => `<td><input type="number" class="ein" placeholder="0"></td>`).join('')}</tr>
+    </tbody></table>
+    <button class="knopf" id="ein">Runde eintragen</button>
+    ${z.runden.length ? `<button class="knopf klein leise" id="undo">Letzte Runde löschen</button>` : ''}
+    <a class="knopf klein leise" href="#/neu">Neue Partie</a>
+  </section>${bilanz()}`;
+  $('#ein').onclick = () => {
+    const felder = [...app.querySelectorAll('.ein')];
+    if (felder.every(f => f.value === '')) return;
+    z.runden.push(felder.map(f => Number(f.value) || 0));
+    LS.set('partie', z); route();
+  };
+  const u = $('#undo');
+  if (u) u.onclick = () => { if (confirm('Letzte Runde löschen?')) { z.runden.pop(); LS.set('partie', z); route(); } };
+}
+
+function route() {
+  const h = location.hash.replace(/^#\/?/, '').split('/');
+  const z = LS.get('partie', null);
+  if (h[0] === 'spiel') spielSeite(h[1]);
+  else if (h[0] === 'neu') setup(null);
+  else if (h[0] === 'zaehler') {
+    if (h[1]) { if (z && z.spiel === h[1]) partie(z); else setup(h[1]); }
+    else if (z) partie(z); else setup(null);
+  }
+  else start();
+  app.querySelectorAll('[data-b]').forEach(b => b.onclick = () => {
+    const w = LS.get('bilanz', [0, 0]);
+    w[+b.dataset.b] = Math.max(0, w[+b.dataset.b] + Number(b.dataset.d));
+    LS.set('bilanz', w); route();
+  });
+}
+
+window.addEventListener('hashchange', () => { route(); window.scrollTo(0, 0); });
+route();
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>

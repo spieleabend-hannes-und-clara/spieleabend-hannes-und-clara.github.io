@@ -126,7 +126,10 @@ function bilanz() {
   const b = LS.get('bilanz', [0, 0]);
   return `<section class="karte"><h2>Ehe-Bilanz</h2><p class="meta">Wer gewinnt öfter? Nach jeder Partie den Sieg eintragen.</p>
   <div class="bilanz">${CONFIG.bilanz.map((n, i) => `<div><div class="zahl">${b[i]}</div><div>${esc(n)}</div>
-    <button class="knopf klein" data-b="${i}" data-d="1">+1</button><button class="knopf klein leise" data-b="${i}" data-d="-1">−1</button></div>`).join('')}</div></section>`;
+    <button class="knopf klein" data-b="${i}" data-d="1">+1</button><button class="knopf klein leise" data-b="${i}" data-d="-1">−1</button></div>`).join('')}</div>
+  <div class="hinweis"><b>Wo wird gespeichert?</b> Punktestand und Ehe-Bilanz liegen nur auf diesem Handy, nicht auf dem des anderen. Zählt deshalb am besten immer mit demselben Handy.
+  ${istApp ? ' Wer die App vom Startbildschirm entfernt, löscht damit auch den Stand.'
+    : `<br>Legt die Seite auf den Startbildschirm und öffnet sie von dort: auf dem iPhone über das Teilen-Symbol und „Zum Home-Bildschirm“, bei Android über das Menü ⋮ und „Zum Startbildschirm hinzufügen“. Im Browser kann der Stand verloren gehen, etwa wenn Browserdaten gelöscht werden oder Safari die Seite eine Woche nicht sieht. Auf dem iPhone sind Browser und Startbildschirm außerdem getrennt: Was im Browser gezählt wurde, taucht in der App nicht auf.`}</div></section>`;
 }
 
 function setup(vorwahl) {
@@ -145,6 +148,12 @@ function setup(vorwahl) {
     const roh = [...app.querySelectorAll('.nm')].map(i => i.value.trim());
     const spieler = roh.filter(Boolean);
     if (spieler.length < 2) { alert('Bitte mindestens zwei Namen eintragen.'); return; }
+    if (z && z.runden.length) {
+      const alt = finde(z.spiel);
+      const frage = `Es läuft noch eine Partie (${alt ? alt.name : 'Freie Partie'}, ${z.runden.length} ${z.runden.length === 1 ? 'Runde' : 'Runden'}). `
+        + 'Sie wird gelöscht, wenn du eine neue startest. Neue Partie starten?';
+      if (!confirm(frage)) return;
+    }
     LS.set('namen', roh);
     LS.set('partie', { spiel: $('#sp').value, spieler, runden: [] });
     geh('#/zaehler');

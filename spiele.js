@@ -8,6 +8,18 @@ const CONFIG = {
     <p>zu eurer Hochzeit wünschen wir euch von Herzen alles Gute.</p>
     <p>Für die vielen Spieleabende, die noch vor euch liegen, haben wir hier unsere liebsten Kartenspiele gesammelt. Mischt gut, spielt fair und lasst euch beim Lügen nicht erwischen.</p>
     <p>Und falls ihr euch einmal nicht einig seid, wer öfter gewinnt: Unten steht die Ehe-Bilanz.</p>`,
+  anleitung: `
+    <p>Hier findet ihr 16 Kartenspiele, die ihr alle mit den Karten aus der Box spielen könnt. Bei jedem Spiel steht oben, welche Karten ihr braucht und welche ihr vorher aussortiert. Zurück auf diese Seite kommt ihr jederzeit, indem ihr euer Handy an die Box haltet.</p>
+    <ul>
+      <li><b>Wie viele spielen mit?</b> Tippt die Spielerzahl an, dann seht ihr nur die Spiele, die dazu passen.</li>
+      <li><b>Was spielen wir heute?</b> Wenn ihr euch nicht entscheiden könnt, entscheidet der Knopf für euch.</li>
+      <li><b>Eure Hausregeln:</b> Unter jeder Anleitung ist Platz für eigene Regeln. Jede Familie spielt Mau Mau ein bisschen anders, also schreibt auf, wie ihr es macht.</li>
+      <li><b>Punktezähler:</b> Namen in Sitzreihenfolge eintragen, nach jeder Runde die Punkte. Der Zähler rechnet mit und zeigt, wer führt und wer als Nächstes gibt.</li>
+      <li><b>Ehe-Bilanz:</b> Nach jedem Spiel tragt ihr ein, wer gewonnen hat. Über die Jahre kommt da einiges zusammen.</li>
+      <li><b>Sicherung:</b> Spielstand und Hausregeln liegen auf dem Handy, mit dem ihr zählt. Bei einem neuen Handy nehmt ihr sie über die Sicherung mit.</li>
+    </ul>
+    <p>Solange eine Anleitung oder der Zähler offen ist, bleibt der Bildschirm an. Wenn ihr die Seite auf den Startbildschirm legt, funktioniert sie auch ohne Internet, zum Beispiel im Urlaub. Wie das geht, steht ganz unten.</p>
+    <p>Viel Spaß beim Spielen!</p>`,
   von: 'Juli und Dion'
 };
 

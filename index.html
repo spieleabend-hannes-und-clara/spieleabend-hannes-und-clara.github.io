@@ -61,6 +61,8 @@ textarea{width:100%;padding:10px;font:16px/1.45 inherit;font-family:inherit;bord
 .zaehler td.vorn{background:var(--gold);color:var(--g);border-radius:6px}
 .geber{margin:10px 0 0;font-size:16px}
 .geber .knopf{margin:0 0 0 8px;padding:5px 12px;font-size:14px}
+.anleitung summary{font:20px Georgia,serif;color:var(--g);cursor:pointer}
+.anleitung[open] summary{margin-bottom:8px}
 .tipp{color:var(--c);opacity:.85;font-size:15px;text-align:center;margin:22px 8px 0;line-height:1.5}
 .fuss{text-align:center;color:var(--gold);opacity:.7;letter-spacing:.5em;margin-top:30px}
 </style>
@@ -84,6 +86,9 @@ const geh = h => { if (location.hash === h) route(); else location.hash = h; };
 const istApp = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 let anzahl = LS.get('anzahl', 0);
 let letzter = null;
+// Beim allerersten Besuch ist die Erklärung aufgeklappt, danach zugeklappt
+let anleitungOffen = !LS.get('gesehen', false);
+LS.set('gesehen', true);
 
 function start() {
   const liste = sortiert().filter(g => passt(g, anzahl));
@@ -91,6 +96,7 @@ function start() {
   <header class="kopf"><div class="farben">♠♥♣♦</div><h1>Spieleabend</h1>
     <div class="paar">${esc(CONFIG.paar)}</div>${CONFIG.datum ? `<div class="datum">${esc(CONFIG.datum)}</div>` : ''}</header>
   <section class="karte widmung">${CONFIG.widmung}<p class="von">${esc(CONFIG.von)}</p></section>
+  ${CONFIG.anleitung ? `<details class="karte anleitung"${anleitungOffen ? ' open' : ''}><summary>So funktioniert diese Seite</summary>${CONFIG.anleitung}</details>` : ''}
   <div class="label">Wie viele spielen mit?</div>
   <div class="chips">${[[0, 'Alle'], [2, '2'], [3, '3'], [4, '4'], [5, '5+']].map(([n, t]) =>
     `<button class="chip${n === anzahl ? ' an' : ''}" data-n="${n}">${t}</button>`).join('')}</div>
@@ -102,6 +108,8 @@ function start() {
   <a class="knopf leise" href="#/zaehler">Punktezähler und Ehe-Bilanz</a>
   ${istApp ? '' : `<p class="tipp">Tipp: Legt euch diese Seite auf den Startbildschirm. Auf dem iPhone über das Teilen-Symbol und „Zum Home-Bildschirm“, bei Android über das Menü ⋮ und „Zum Startbildschirm hinzufügen“. Dann funktioniert sie auch ohne Internet.</p>`}
   <div class="fuss">♠♥♣♦</div>`;
+  const d = app.querySelector('details.anleitung');
+  if (d) d.ontoggle = () => { anleitungOffen = d.open; };
   app.querySelectorAll('.chip').forEach(b => b.onclick = () => { anzahl = +b.dataset.n; LS.set('anzahl', anzahl); start(); });
   $('#zufall').onclick = () => {
     const pool = liste.length > 1 ? liste.filter(g => g.id !== letzter) : liste;

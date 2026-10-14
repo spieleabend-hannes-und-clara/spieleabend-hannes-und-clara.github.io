@@ -427,7 +427,7 @@ const SPIELE = [
       <li>Kommt die Bank über 21, zahlt sie allen, die noch im Spiel sind, ihren Einsatz.</li>
       <li>Sonst vergleicht sie mit jedem Spieler: Wer mehr hat, bekommt seinen Einsatz von der Bank. Bei Gleichstand oder weniger gewinnt die Bank.</li>
       <li>Die Bank wechselt nach jeder Runde oder wenn jemand genau 21 hat.</li></ul>`],
-    ['Variante Black Jack', '<p>Mit 52 Karten: Bildkarten zählen 10, das Ass 1 oder 11. Jeder bekommt zwei Karten, die Bank muss bis 16 ziehen und ab 17 stehen bleiben. Ass und Bildkarte als erste zwei Karten sind ein Black Jack und werden 3 zu 2 ausgezahlt.</p>']
+    ['Variante Black Jack', '<p>Mit 52 Karten: Bildkarten zählen 10, das Ass 1 oder 11. Jeder bekommt zwei Karten, die Bank muss bis 16 ziehen und ab 17 stehen bleiben. Ein Ass und eine Karte mit Wert 10 (10, Bube, Dame, König) als erste zwei Karten sind ein Black Jack und werden 3 zu 2 ausgezahlt.</p>']
   ]
 }
 

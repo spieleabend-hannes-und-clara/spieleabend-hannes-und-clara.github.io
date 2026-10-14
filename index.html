@@ -55,6 +55,7 @@ label{display:block;margin-top:12px;font-size:15px;color:var(--m)}
 input[type=text],select{width:100%;padding:10px;font-size:17px;border:1px solid #cdbf9f;border-radius:8px;background:#fff;margin:4px 0}
 .bilanz{display:flex;justify-content:space-around;text-align:center}
 .bilanz .zahl{font:46px Georgia,serif;color:var(--g);line-height:1.2}
+.tipp{color:var(--c);opacity:.85;font-size:15px;text-align:center;margin:22px 8px 0;line-height:1.5}
 .fuss{text-align:center;color:var(--gold);opacity:.7;letter-spacing:.5em;margin-top:30px}
 </style>
 </head>
@@ -74,6 +75,7 @@ const passt = (g, n) => !n || (n === 5 ? g.max >= 5 : g.min <= n && g.max >= n);
 const sortiert = () => [...SPIELE].sort((a, b) => a.name.localeCompare(b.name, 'de'));
 const finde = id => SPIELE.find(g => g.id === id);
 const geh = h => { if (location.hash === h) route(); else location.hash = h; };
+const istApp = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 let anzahl = LS.get('anzahl', 0);
 let letzter = null;
 
@@ -92,6 +94,7 @@ function start() {
   ${liste.map(g => `<a class="karte" href="#/spiel/${g.id}"><h2>${g.name}</h2>
     <div class="meta">${spielerText(g)} · ${g.dauer} · ${g.art}</div><p>${g.kurz}</p></a>`).join('')}
   <a class="knopf leise" href="#/zaehler">Punktezähler und Ehe-Bilanz</a>
+  ${istApp ? '' : `<p class="tipp">Tipp: Legt euch diese Seite auf den Startbildschirm. Auf dem iPhone über das Teilen-Symbol und „Zum Home-Bildschirm“, bei Android über das Menü ⋮ und „Zum Startbildschirm hinzufügen“. Dann funktioniert sie auch ohne Internet.</p>`}
   <div class="fuss">♠♥♣♦</div>`;
   app.querySelectorAll('.chip').forEach(b => b.onclick = () => { anzahl = +b.dataset.n; LS.set('anzahl', anzahl); start(); });
   $('#zufall').onclick = () => {

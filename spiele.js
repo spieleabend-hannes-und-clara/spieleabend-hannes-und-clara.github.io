@@ -11,8 +11,6 @@ const CONFIG = {
   von: '[Name] und Dion'
 };
 
-// Kartenwerte, die mehrere Spiele nutzen
-const RANG = 'Ass, König, Dame, Bube, 10, 9, 8, 7';
 
 const SPIELE = [
 

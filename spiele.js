@@ -8,7 +8,7 @@ const CONFIG = {
     <p>zu eurer Hochzeit wünschen wir euch von Herzen alles Gute.</p>
     <p>Für die vielen Spieleabende, die noch vor euch liegen, haben wir hier unsere liebsten Kartenspiele gesammelt. Mischt gut, spielt fair und lasst euch beim Lügen nicht erwischen.</p>
     <p>Und falls ihr euch einmal nicht einig seid, wer öfter gewinnt: Unten steht die Ehe-Bilanz.</p>`,
-  von: '[Name] und Dion'
+  von: 'Juli und Dion'
 };
 
 

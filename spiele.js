@@ -108,7 +108,7 @@ const SPIELE = [
   id: 'durak', name: 'Durak', min: 2, max: 6, dauer: '15 bis 30 Min.', art: 'Angriffsspiel', deck: '36 Karten',
   kurz: 'Das russische Kultspiel: angreifen, verteidigen, nachlegen. Wer am Ende Karten hat, ist der Durak, der Dummkopf.',
   aussortieren: 'Aus einem Deck die 2 bis 5 und die Joker entfernen. Es bleiben 6 bis Ass.',
-  zaehler: false,
+  zaehlerHinweis: 'Wer Durak wird, bekommt 1 Punkt, alle anderen 0. Die höchste Summe zeigt, wer am häufigsten Durak war.',
   abschnitte: [
     ['Ziel', '<p>Seine Karten loswerden. Es gibt keinen Gewinner, nur einen Verlierer: Wer als Letzter noch Karten hat, ist der Durak.</p>'],
     ['Vorbereitung', `<p>Jeder bekommt 6 Karten. Die nächste Karte wird offen aufgedeckt, ihre Farbe ist Trumpf. Sie kommt quer unter den Stapel und wird als letzte gezogen.</p>
@@ -132,7 +132,7 @@ const SPIELE = [
   id: 'arschloch', name: 'Arschloch', min: 4, max: 8, dauer: 'ab 30 Min.', art: 'Ablegespiel', deck: '32 oder 52 Karten',
   kurz: 'Karten schneller loswerden als die anderen. Wer zuletzt übrig bleibt, muss in der nächsten Runde seine besten Karten abgeben.',
   aussortieren: 'Bis fünf Spieler: 2 bis 6 entfernen (32 Karten). Ab sechs Spielern alle 52 Karten nehmen. Ohne Joker.',
-  zaehler: false,
+  zaehlerHinweis: 'Pro Runde Punkte nach Rang eintragen, zum Beispiel Präsident 2, Vize-Präsident 1, Bürger 0, Vize-Arschloch −1, Arschloch −2.',
   abschnitte: [
     ['Ziel', '<p>Als Erstes alle Karten loswerden und Präsident werden. Wer übrig bleibt, ist das Arschloch.</p>'],
     ['Vorbereitung', '<p>Alle Karten werden verteilt. Es zählt nur der Wert, nicht die Farbe. Das Ass ist die höchste Karte, die kleinste Zahl die niedrigste.</p>'],
@@ -157,7 +157,7 @@ const SPIELE = [
   id: 'luegen', name: 'Lügen', min: 3, max: 8, dauer: '15 bis 30 Min.', art: 'Bluffspiel', deck: '52 Karten',
   kurz: 'Karten verdeckt ablegen und behaupten, was sie sind. Wer beim Lügen erwischt wird, nimmt den Stapel.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten. Ab sieben Spielern zwei Decks mischen.',
-  zaehler: false,
+  zaehlerHinweis: 'Wer gewinnt, bekommt 1 Punkt. Die höchste Summe gewinnt den Abend.',
   abschnitte: [
     ['Ziel', '<p>Als Erstes alle Karten loswerden, egal ob ehrlich oder nicht.</p>'],
     ['Vorbereitung', '<p>Alle Karten werden verteilt. Wer vier gleiche Karten hat, legt sie offen ab, sie sind aus dem Spiel. Das gilt das ganze Spiel über.</p>'],
@@ -288,7 +288,7 @@ const SPIELE = [
   id: 'schwimmen', name: 'Schwimmen', min: 3, max: 9, dauer: '15 bis 30 Min.', art: 'Tauschspiel', deck: '32 Karten',
   kurz: 'Karten aus der Mitte tauschen, bis man 31 Punkte in einer Farbe hat. Wer zu wenig hat, verliert ein Leben.',
   aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Jeder braucht dazu 3 Leben, zum Beispiel Streichhölzer oder Münzen.',
-  zaehler: false,
+  zaehlerHinweis: 'Wer als Letzter übrig bleibt, bekommt 1 Punkt. Die Leben zählt ihr weiter mit Streichhölzern oder Münzen.',
   abschnitte: [
     ['Ziel', '<p>Möglichst viele Punkte in einer Farbe auf der Hand haben. Wer am Ende einer Runde die wenigsten hat, verliert ein Leben. Wer zuletzt übrig bleibt, gewinnt.</p>'],
     ['Werte', `<ul><li>Ass 11, Bildkarten 10, Zahlen nach Augen.</li>
@@ -312,7 +312,7 @@ const SPIELE = [
   id: 'speed', name: 'Speed', min: 2, max: 2, dauer: '5 Min.', art: 'Reaktionsspiel', deck: '52 Karten',
   kurz: 'Keiner wartet auf den anderen: Beide legen gleichzeitig so schnell wie möglich ab.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
-  zaehler: false,
+  zaehlerHinweis: 'Wer gewinnt, bekommt 1 Punkt.',
   abschnitte: [
     ['Ziel', '<p>Als Erstes alle eigenen Karten loswerden. Es gibt keine Reihenfolge, beide spielen gleichzeitig.</p>'],
     ['Vorbereitung', `<ul>
@@ -381,7 +381,7 @@ const SPIELE = [
   id: 'poker', name: 'Poker', min: 2, max: 9, dauer: 'beliebig', art: 'Bluffspiel', deck: '52 Karten',
   kurz: 'Texas Hold’em: zwei eigene Karten, fünf gemeinsame, und die Frage, wer blufft.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker. Dazu Spielgeld, zum Beispiel Chips, Streichhölzer oder Gummibärchen.',
-  zaehler: false,
+  zaehlerHinweis: 'Am Ende des Abends die Chips jedes Spielers eintragen oder pro gewonnener Partie 1 Punkt.',
   abschnitte: [
     ['Ziel', '<p>Den Einsatz in der Mitte gewinnen: mit der besten Hand am Schluss oder indem alle anderen vorher aussteigen.</p>'],
     ['Rangfolge der Hände', `<p>Gewertet werden die besten 5 Karten aus den 2 eigenen und den 5 gemeinsamen. Von hoch nach niedrig:</p>
@@ -415,7 +415,7 @@ const SPIELE = [
   id: 'siebzehn-und-vier', name: '17 und 4', min: 2, max: 7, dauer: 'beliebig', art: 'Glücksspiel', deck: '32 Karten',
   kurz: 'So nah wie möglich an 21 heran, ohne darüber zu kommen. Die deutsche Urform von Black Jack.',
   aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Dazu Spielgeld, zum Beispiel Chips oder Gummibärchen.',
-  zaehler: false,
+  zaehlerHinweis: 'Gewinn oder Verlust jeder Runde in Spielgeld eintragen, zum Beispiel 2 oder −2.',
   abschnitte: [
     ['Ziel', '<p>Mit seinen Karten näher an 21 Punkte kommen als die Bank, ohne 21 zu überschreiten.</p>'],
     ['Werte', '<p>Ass 11, König 4, Dame 3, Bube 2, Zahlen nach Augen. Zwei Asse zählen als 21.</p>'],

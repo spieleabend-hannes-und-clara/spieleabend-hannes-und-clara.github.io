@@ -118,7 +118,7 @@ function spielSeite(id) {
     <div class="hinweis"><b>Karten:</b> ${g.aussortieren}</div>
     ${g.abschnitte.map(([t, h]) => `<h3>${t}</h3>${h}`).join('')}
   </article>
-  ${g.zaehler !== false ? `<a class="knopf" href="#/zaehler/${g.id}">Punkte zählen</a>` : ''}
+  <a class="knopf" href="#/zaehler/${g.id}">Punkte zählen</a>
   <a class="knopf leise" href="#/">Zurück zur Übersicht</a>`;
 }
 
@@ -137,7 +137,7 @@ function setup(vorwahl) {
   const namen = LS.get('namen', [CONFIG.bilanz[0], CONFIG.bilanz[1], '', '', '', '']);
   app.innerHTML = `<a class="zurueck" href="#/">‹ Alle Spiele</a>
   <section class="karte"><h2>Neue Partie</h2>
-    <label>Spiel</label><select id="sp"><option value="">Freie Partie</option>${sortiert().filter(g => g.zaehler !== false).map(g =>
+    <label>Spiel</label><select id="sp"><option value="">Freie Partie</option>${sortiert().map(g =>
       `<option value="${g.id}"${g.id === vorwahl ? ' selected' : ''}>${g.name}</option>`).join('')}</select>
     <label>Spieler oder Teams (leere Felder fallen weg)</label>
     ${namen.map((n, i) => `<input type="text" class="nm" value="${esc(n)}" placeholder="Name ${i + 1}">`).join('')}

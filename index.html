@@ -63,6 +63,7 @@ textarea{width:100%;padding:10px;font:16px/1.45 inherit;font-family:inherit;bord
 .geber .knopf{margin:0 0 0 8px;padding:5px 12px;font-size:14px}
 .anleitung summary{font:20px Georgia,serif;color:var(--g);cursor:pointer}
 .anleitung[open] summary{margin-bottom:8px}
+.stufe{color:var(--g);letter-spacing:2px;font-size:13px}
 .tipp{color:var(--c);opacity:.85;font-size:15px;text-align:center;margin:22px 8px 0;line-height:1.5}
 .fuss{text-align:center;color:var(--gold);opacity:.7;letter-spacing:.5em;margin-top:30px}
 </style>
@@ -82,6 +83,7 @@ const spielerText = g => g.min === g.max ? g.min + ' Spieler' : g.min + ' bis ' 
 const passt = (g, n) => !n || (n === 5 ? g.max >= 5 : g.min <= n && g.max >= n);
 const sortiert = () => [...SPIELE].sort((a, b) => a.name.localeCompare(b.name, 'de'));
 const finde = id => SPIELE.find(g => g.id === id);
+const stufe = g => g.schwierigkeit ? `<span class="stufe" title="Schwierigkeit ${g.schwierigkeit} von 5">${"●".repeat(g.schwierigkeit)}${"○".repeat(5 - g.schwierigkeit)}</span>` : "";
 const geh = h => { if (location.hash === h) route(); else location.hash = h; };
 const istApp = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 let anzahl = LS.get('anzahl', 0);
@@ -104,7 +106,8 @@ function start() {
   <div id="vorschlag"></div>
   <div class="label">${liste.length} Spiele</div>
   ${liste.map(g => `<a class="karte" href="#/spiel/${g.id}"><h2>${g.name}</h2>
-    <div class="meta">${spielerText(g)} · ${g.dauer} · ${g.art}</div><p>${g.kurz}</p></a>`).join('')}
+    <div class="meta">${spielerText(g)} · ${g.dauer} · ${g.art}</div>
+    <div class="meta">Schwierigkeit ${stufe(g)}</div><p>${g.kurz}</p></a>`).join('')}
   <a class="knopf leise" href="#/zaehler">Punktezähler und Ehe-Bilanz</a>
   ${istApp ? '' : `<p class="tipp">Tipp: Legt euch diese Seite auf den Startbildschirm. Auf dem iPhone über das Teilen-Symbol und „Zum Home-Bildschirm“, bei Android über das Menü ⋮ und „Zum Startbildschirm hinzufügen“. Dann funktioniert sie auch ohne Internet.</p>`}
   <div class="fuss">♠♥♣♦</div>`;
@@ -117,7 +120,7 @@ function start() {
     const g = pool[Math.floor(Math.random() * pool.length)];
     letzter = g.id;
     $('#vorschlag').innerHTML = `<div class="karte zufall"><div class="meta">Heute spielt ihr</div><h2>${g.name}</h2>
-      <div class="meta">${spielerText(g)} · ${g.dauer}</div><p>${g.kurz}</p>
+      <div class="meta">${spielerText(g)} · ${g.dauer} · Schwierigkeit ${stufe(g)}</div><p>${g.kurz}</p>
       <a class="knopf klein" href="#/spiel/${g.id}">Zur Anleitung</a></div>`;
   };
 }
@@ -127,7 +130,7 @@ function spielSeite(id) {
   if (!g) return start();
   app.innerHTML = `<a class="zurueck" href="#/">‹ Alle Spiele</a>
   <article class="karte"><h2>${g.name}</h2>
-    <div class="tags"><span class="tag">${spielerText(g)}</span><span class="tag">${g.dauer}</span><span class="tag">${g.art}</span><span class="tag">${g.deck}</span></div>
+    <div class="tags"><span class="tag">${spielerText(g)}</span><span class="tag">${g.dauer}</span><span class="tag">${g.art}</span><span class="tag">${g.deck}</span><span class="tag">Schwierigkeit ${stufe(g)}</span></div>
     <p>${g.kurz}</p>
     <div class="hinweis"><b>Karten:</b> ${g.aussortieren}</div>
     ${g.abschnitte.map(([t, h]) => `<h3>${t}</h3>${h}`).join('')}

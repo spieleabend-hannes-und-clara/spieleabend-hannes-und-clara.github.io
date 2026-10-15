@@ -27,7 +27,7 @@ const CONFIG = {
 const SPIELE = [
 
 {
-  id: 'mau-mau', name: 'Mau Mau', min: 2, max: 6, dauer: '10 bis 20 Min.', art: 'Ablegespiel', deck: '32 Karten',
+  id: 'mau-mau', name: 'Mau Mau', min: 2, max: 6, dauer: '10 bis 20 Min.', art: 'Ablegespiel', deck: '32 Karten', schwierigkeit: 1,
   kurz: 'Der Klassiker: Karten nach Farbe oder Wert ablegen und als Erstes alle loswerden.',
   aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Ab fünf Spielern alle 52 Karten nehmen.',
   zaehlerHinweis: 'Wer nicht gewinnt, trägt den Wert seiner Restkarten ein (Bube 20, Ass 11, Zahlen nach Augen, König 4, Dame 3). Die niedrigste Summe gewinnt.',
@@ -53,7 +53,7 @@ const SPIELE = [
 },
 
 {
-  id: 'skat', name: 'Skat', min: 3, max: 3, dauer: 'ab 45 Min.', art: 'Stichspiel', deck: '32 Karten',
+  id: 'skat', name: 'Skat', min: 3, max: 3, dauer: 'ab 45 Min.', art: 'Stichspiel', deck: '32 Karten', schwierigkeit: 5,
   kurz: 'Das deutsche Kartenspiel schlechthin: einer gegen zwei, mit Reizen, Skat und viel Taktik.',
   aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen.',
   zaehlerHinweis: 'Nur der Alleinspieler bekommt Punkte: gewonnen plus Spielwert, verloren minus doppelter Spielwert. Die anderen tragen 0 ein.',
@@ -95,7 +95,7 @@ const SPIELE = [
 },
 
 {
-  id: 'spades', name: 'Spades', min: 4, max: 4, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '52 Karten',
+  id: 'spades', name: 'Spades', min: 4, max: 4, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '52 Karten', schwierigkeit: 3,
   kurz: 'Der amerikanische Klassiker für zwei Teams: ansagen, wie viele Stiche man holt, und genau das schaffen. Pik sticht immer.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
   zaehlerHinweis: 'Zwei Spalten anlegen, eine pro Team. Ansage erfüllt: 10 × Ansage plus 1 je Überstich. Verfehlt: minus 10 × Ansage.',
@@ -119,7 +119,7 @@ const SPIELE = [
 },
 
 {
-  id: 'durak', name: 'Durak', min: 2, max: 6, dauer: '15 bis 30 Min.', art: 'Angriffsspiel', deck: '36 Karten',
+  id: 'durak', name: 'Durak', min: 2, max: 6, dauer: '15 bis 30 Min.', art: 'Angriffsspiel', deck: '36 Karten', schwierigkeit: 2,
   kurz: 'Das russische Kultspiel: angreifen, verteidigen, nachlegen. Wer am Ende Karten hat, ist der Durak, der Dummkopf.',
   aussortieren: 'Aus einem Deck die 2 bis 5 und die Joker entfernen. Es bleiben 6 bis Ass.',
   zaehlerHinweis: 'Wer Durak wird, bekommt 1 Punkt, alle anderen 0. Die höchste Summe zeigt, wer am häufigsten Durak war. Markiert ist, wer am seltensten Durak wurde.',
@@ -144,7 +144,7 @@ const SPIELE = [
 },
 
 {
-  id: 'arschloch', name: 'Arschloch', min: 4, max: 8, dauer: 'ab 30 Min.', art: 'Ablegespiel', deck: '32 oder 52 Karten',
+  id: 'arschloch', name: 'Arschloch', min: 4, max: 8, dauer: 'ab 30 Min.', art: 'Ablegespiel', deck: '32 oder 52 Karten', schwierigkeit: 2,
   kurz: 'Karten schneller loswerden als die anderen. Wer zuletzt übrig bleibt, muss in der nächsten Runde seine besten Karten abgeben.',
   aussortieren: 'Bis fünf Spieler: 2 bis 6 entfernen (32 Karten). Ab sechs Spielern alle 52 Karten nehmen. Ohne Joker.',
   zaehlerHinweis: 'Pro Runde Punkte nach Rang eintragen, zum Beispiel Präsident 2, Vize-Präsident 1, Bürger 0, Vize-Arschloch −1, Arschloch −2.',
@@ -170,7 +170,7 @@ const SPIELE = [
 },
 
 {
-  id: 'luegen', name: 'Lügen', min: 3, max: 8, dauer: '15 bis 30 Min.', art: 'Bluffspiel', deck: '52 Karten',
+  id: 'luegen', name: 'Lügen', min: 3, max: 8, dauer: '15 bis 30 Min.', art: 'Bluffspiel', deck: '52 Karten', schwierigkeit: 1,
   kurz: 'Karten verdeckt ablegen und behaupten, was sie sind. Wer beim Lügen erwischt wird, nimmt den Stapel.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten. Ab sieben Spielern zwei Decks mischen.',
   zaehlerHinweis: 'Wer gewinnt, bekommt 1 Punkt. Die höchste Summe gewinnt den Abend.',
@@ -191,7 +191,7 @@ const SPIELE = [
 },
 
 {
-  id: 'doppelkopf', name: 'Doppelkopf', min: 4, max: 4, dauer: 'ab 60 Min.', art: 'Stichspiel', deck: '48 Karten (2 Decks)',
+  id: 'doppelkopf', name: 'Doppelkopf', min: 4, max: 4, dauer: 'ab 60 Min.', art: 'Stichspiel', deck: '48 Karten (2 Decks)', schwierigkeit: 4,
   kurz: 'Zwei gegen zwei, aber wer zusammenspielt, ist anfangs geheim. Die beiden Kreuz-Damen verraten es.',
   aussortieren: 'Aus zwei Decks jeweils die 2 bis 8 und die Joker entfernen. Jede Karte von 9 bis Ass gibt es dann doppelt.',
   zaehlerHinweis: 'Jeder Spieler bekommt die Spielpunkte als Plus (Gewinner) oder Minus (Verlierer). Bei einem Solo zählt der Solist dreifach.',
@@ -220,7 +220,7 @@ const SPIELE = [
 },
 
 {
-  id: 'romme', name: 'Rommé', min: 2, max: 6, dauer: '30 bis 60 Min.', art: 'Legespiel', deck: '2 Decks mit Joker',
+  id: 'romme', name: 'Rommé', min: 2, max: 6, dauer: '30 bis 60 Min.', art: 'Legespiel', deck: '2 Decks mit Joker', schwierigkeit: 2,
   kurz: 'Karten zu Sätzen und Folgen kombinieren, auslegen und als Erstes alle loswerden.',
   aussortieren: 'Zwei ganze Decks mit allen Jokern zusammenmischen.',
   zaehlerHinweis: 'Nach jeder Runde die Restkarten als Punkte eintragen. Wer nach der vereinbarten Rundenzahl die wenigsten hat, gewinnt.',
@@ -246,7 +246,7 @@ const SPIELE = [
 },
 
 {
-  id: 'gin-romme', name: 'Gin Rommé', min: 2, max: 2, dauer: '20 bis 40 Min.', art: 'Legespiel', deck: '52 Karten',
+  id: 'gin-romme', name: 'Gin Rommé', min: 2, max: 2, dauer: '20 bis 40 Min.', art: 'Legespiel', deck: '52 Karten', schwierigkeit: 3,
   kurz: 'Das schnelle Rommé für zwei: Hand sortieren, im richtigen Moment klopfen und den Gegner überraschen.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
   zaehlerHinweis: 'Nach jeder Runde die Punkte des Gewinners eintragen. Wer zuerst 100 Punkte hat, gewinnt.',
@@ -272,7 +272,7 @@ const SPIELE = [
 },
 
 {
-  id: 'canasta', name: 'Canasta', min: 4, max: 4, dauer: '1 bis 2 Std.', art: 'Legespiel', deck: '2 Decks mit 4 Jokern',
+  id: 'canasta', name: 'Canasta', min: 4, max: 4, dauer: '1 bis 2 Std.', art: 'Legespiel', deck: '2 Decks mit 4 Jokern', schwierigkeit: 4,
   kurz: 'Das Teamspiel für lange Abende: gleiche Karten sammeln, Canastas bauen und den Ablagestapel erobern.',
   aussortieren: 'Zwei ganze Decks mit insgesamt 4 Jokern (108 Karten).',
   zaehlerHinweis: 'Zwei Spalten anlegen, eine pro Team. Wer zuerst 5000 Punkte erreicht, gewinnt.',
@@ -302,7 +302,7 @@ const SPIELE = [
 },
 
 {
-  id: 'schwimmen', name: 'Schwimmen', min: 3, max: 9, dauer: '15 bis 30 Min.', art: 'Tauschspiel', deck: '32 Karten',
+  id: 'schwimmen', name: 'Schwimmen', min: 3, max: 9, dauer: '15 bis 30 Min.', art: 'Tauschspiel', deck: '32 Karten', schwierigkeit: 2,
   kurz: 'Karten aus der Mitte tauschen, bis man 31 Punkte in einer Farbe hat. Wer zu wenig hat, verliert ein Leben.',
   aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Jeder braucht dazu 3 Leben, zum Beispiel Streichhölzer oder Münzen.',
   zaehlerHinweis: 'Wer als Letzter übrig bleibt, bekommt 1 Punkt. Die Leben zählt ihr weiter mit Streichhölzern oder Münzen.',
@@ -326,7 +326,7 @@ const SPIELE = [
 },
 
 {
-  id: 'speed', name: 'Speed', min: 2, max: 2, dauer: '5 Min.', art: 'Reaktionsspiel', deck: '52 Karten',
+  id: 'speed', name: 'Speed', min: 2, max: 2, dauer: '5 Min.', art: 'Reaktionsspiel', deck: '52 Karten', schwierigkeit: 1,
   kurz: 'Keiner wartet auf den anderen: Beide legen gleichzeitig so schnell wie möglich ab.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
   zaehlerHinweis: 'Wer gewinnt, bekommt 1 Punkt.',
@@ -347,7 +347,7 @@ const SPIELE = [
 },
 
 {
-  id: 'cribbage', name: 'Cribbage', min: 2, max: 2, dauer: '30 bis 45 Min.', art: 'Kombinationsspiel', deck: '52 Karten',
+  id: 'cribbage', name: 'Cribbage', min: 2, max: 2, dauer: '30 bis 45 Min.', art: 'Kombinationsspiel', deck: '52 Karten', schwierigkeit: 4,
   kurz: 'Der englische Klassiker: Fünfzehner, Paare und Folgen zählen, bis einer 121 Punkte hat. Ideal für zwei.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker. Statt eines Cribbage-Bretts zählt der Punktezähler.',
   zaehlerHinweis: 'Punkte jeweils sofort eintragen, wenn sie entstehen. Wer zuerst 121 erreicht, gewinnt, auch mitten in der Runde.',
@@ -374,7 +374,7 @@ const SPIELE = [
 },
 
 {
-  id: 'pik-ist-trumpf', name: 'Pik ist Trumpf', min: 3, max: 6, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '32 oder 52 Karten',
+  id: 'pik-ist-trumpf', name: 'Pik ist Trumpf', min: 3, max: 6, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '32 oder 52 Karten', schwierigkeit: 2,
   kurz: 'Jede Runde vorhersagen, wie viele Stiche man genau macht. Pik ist immer Trumpf.',
   aussortieren: 'Die Zahl der Karten richtet sich nach der Spielerzahl: Bei 3 oder 4 Spielern reichen 32 Karten (7 bis Ass), ab 5 Spielern alle 52. Ohne Joker.',
   zaehlerHinweis: 'Genau getroffen: 10 plus die Zahl der Stiche. Daneben: so viele Minuspunkte, wie man danebenliegt.',
@@ -396,7 +396,7 @@ const SPIELE = [
 },
 
 {
-  id: 'poker', name: 'Poker', min: 2, max: 9, dauer: 'beliebig', art: 'Bluffspiel', deck: '52 Karten',
+  id: 'poker', name: 'Poker', min: 2, max: 9, dauer: 'beliebig', art: 'Bluffspiel', deck: '52 Karten', schwierigkeit: 3,
   kurz: 'Texas Hold’em: zwei eigene Karten, fünf gemeinsame, und die Frage, wer blufft.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker. Dazu Spielgeld, zum Beispiel Chips, Streichhölzer oder Gummibärchen.',
   zaehlerHinweis: 'Am Ende des Abends die Chips jedes Spielers eintragen oder pro gewonnener Partie 1 Punkt.',
@@ -430,7 +430,7 @@ const SPIELE = [
 },
 
 {
-  id: 'siebzehn-und-vier', name: '17 und 4', min: 2, max: 7, dauer: 'beliebig', art: 'Glücksspiel', deck: '32 Karten',
+  id: 'siebzehn-und-vier', name: '17 und 4', min: 2, max: 7, dauer: 'beliebig', art: 'Glücksspiel', deck: '32 Karten', schwierigkeit: 1,
   kurz: 'So nah wie möglich an 21 heran, ohne darüber zu kommen. Die deutsche Urform von Black Jack.',
   aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Dazu Spielgeld, zum Beispiel Chips oder Gummibärchen.',
   zaehlerHinweis: 'Gewinn oder Verlust jeder Runde in Spielgeld eintragen, zum Beispiel 2 oder −2.',

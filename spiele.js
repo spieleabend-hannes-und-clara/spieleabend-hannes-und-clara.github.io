@@ -7,7 +7,7 @@ const CONFIG = {
     <p>Liebe Clara, lieber Hannes,</p>
     <p>zu eurer Hochzeit wünschen wir euch von Herzen alles Gute.</p>
     <p>Für die vielen Spieleabende, die noch vor euch liegen, haben wir hier unsere liebsten Kartenspiele gesammelt. Mischt gut, spielt fair und lasst euch beim Lügen nicht erwischen.</p>
-    <p>Und falls ihr euch einmal nicht einig seid, wer öfter gewinnt: Unten steht die Ehe-Bilanz.</p>`,
+    <p>Und falls ihr euch einmal nicht einig seid, wer öfter gewinnt: Ganz unten geht es zur Ehe-Bilanz.</p>`,
   anleitung: `
     <p>Hier findet ihr 16 Kartenspiele, die ihr alle mit den Karten aus der Box spielen könnt. Bei jedem Spiel steht oben, welche Karten ihr braucht und welche ihr vorher aussortiert. Zurück auf diese Seite kommt ihr jederzeit, indem ihr euer Handy an die Box haltet.</p>
     <ul>

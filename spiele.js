@@ -34,7 +34,7 @@ const SPIELE = [
   wenigerGewinnt: true,
   abschnitte: [
     ['Ziel', '<p>Als Erstes alle Handkarten ablegen.</p>'],
-    ['Vorbereitung', '<p>Jeder bekommt 5 Karten. Der Rest liegt verdeckt als Stapel in der Mitte, die oberste Karte wird daneben offen hingelegt.</p>'],
+    ['Vorbereitung', '<p>Jeder bekommt 5 Karten. Der Rest liegt verdeckt als Stapel in der Mitte, die oberste Karte wird daneben offen hingelegt.</p><p>Ist diese erste Karte eine Sonderkarte, gilt sie für den ersten Spieler: Bei einer 7 zieht er 2 Karten, bei einer 8 setzt er aus, bei einem Buben darf er jede beliebige Karte legen.</p>'],
     ['Ablauf', `<ul>
       <li>Links vom Geber geht es los, dann im Uhrzeigersinn.</li>
       <li>Wer dran ist, legt eine Karte auf den offenen Stapel. Sie muss in Farbe oder Wert zur obersten Karte passen.</li>
@@ -74,8 +74,9 @@ const SPIELE = [
       <table><tr><th>Spiel</th><td>Karo</td><td>Herz</td><td>Pik</td><td>Kreuz</td><td>Grand</td></tr>
       <tr><th>Grundwert</th><td>9</td><td>10</td><td>11</td><td>12</td><td>24</td></tr></table>
       <ul>
-      <li><b>Spitzen:</b> Wie viele Trümpfe in lückenloser Folge ab dem Kreuz-Buben man hat („mit 2“) oder nicht hat („ohne 2“, wenn der Kreuz- und der Pik-Bube fehlen). Beide Fälle zählen gleich.</li>
-      <li><b>Zuschläge je +1:</b> Hand (ohne Skat gespielt), Schneider (Gegner haben höchstens 30 Augen), Schneider angesagt, Schwarz (Gegner ohne Stich), Schwarz angesagt, offen gespielt.</li>
+      <li><b>Spitzen:</b> Wie viele Trümpfe in lückenloser Folge ab dem Kreuz-Buben man hat („mit 2“) oder nicht hat („ohne 2“, wenn der Kreuz- und der Pik-Bube fehlen). Beide Fälle zählen gleich. Beim Grand zählen nur die Buben, also höchstens 4 Spitzen.</li>
+      <li><b>Zuschläge je +1:</b> Hand (ohne Skat gespielt), Schneider (Gegner haben höchstens 30 Augen), Schwarz (Gegner ohne Stich).</li>
+      <li><b>Nur bei Handspielen</b> zusätzlich je +1: Schneider angesagt, Schwarz angesagt, offen gespielt. Offen spielen darf man ein Farbspiel oder einen Grand nur zusammen mit Schwarz angesagt.</li>
       <li><b>Null-Spiele</b> haben feste Werte: Null 23, Null Hand 35, Null ouvert 46, Null ouvert Hand 59.</li></ul>
       <p class="meta">Beispiel: Herz mit Kreuz- und Pik-Bube, ohne Herz-Bube: „mit 2, Spiel 3“, also 3 × 10 = 30.</p>`],
     ['Ablauf', `<ul>
@@ -151,7 +152,8 @@ const SPIELE = [
     ['Ziel', '<p>Als Erstes alle Karten loswerden und Präsident werden. Wer übrig bleibt, ist das Arschloch.</p>'],
     ['Vorbereitung', '<p>Alle Karten werden verteilt. Es zählt nur der Wert, nicht die Farbe. Das Ass ist die höchste Karte, die kleinste Zahl die niedrigste.</p>'],
     ['Ablauf', `<ul>
-      <li>Der Startspieler legt eine Karte oder mehrere gleiche Karten offen in die Mitte, zum Beispiel ein Paar Neunen.</li>
+      <li>Im ersten Spiel beginnt der Spieler links vom Geber, danach immer das Arschloch.</li>
+      <li>Wer beginnt, legt eine Karte oder mehrere gleiche Karten offen in die Mitte, zum Beispiel ein Paar Neunen.</li>
       <li>Reihum muss jeder dieselbe Anzahl Karten mit höherem Wert legen, also etwa ein Paar Zehnen. Wer nicht kann oder will, passt.</li>
       <li>Passen alle anderen, kommt der Stapel weg. Wer zuletzt gelegt hat, eröffnet neu mit beliebiger Anzahl.</li>
       <li>Wer passt, darf in der nächsten Runde um den Tisch wieder einsteigen.</li></ul>`],
@@ -359,7 +361,7 @@ const SPIELE = [
       <ul><li>Summe genau 15: 2 Punkte. Summe genau 31: 2 Punkte.</li>
       <li>Gleicher Wert wie die Karte davor: Paar 2, Drilling 6, Vierling 12.</li>
       <li>Die letzten gelegten Karten bilden eine Folge (in beliebiger Reihenfolge): 1 Punkt pro Karte, ab 3 Karten.</li></ul>
-      <p>Wer nicht legen kann, ohne über 31 zu kommen, sagt „Go“. Der andere legt weiter, solange er kann. Die letzte Karte bringt 1 Punkt. Dann beginnt die Summe wieder bei 0.</p>`],
+      <p>Wer nicht legen kann, ohne über 31 zu kommen, sagt „Go“. Der andere legt weiter, solange er kann. Die letzte Karte bringt 1 Punkt. Ist die Summe dabei genau 31, gibt es nur die 2 Punkte für die 31, nicht zusätzlich den Punkt für die letzte Karte. Dann beginnt die Summe wieder bei 0.</p>`],
     ['Zählen', `<p>Zuerst zählt der Nicht-Geber, dann der Geber seine Hand, dann der Geber die Crib. Zur Hand gehört immer die Startkarte dazu.</p>
       <ul><li>Jede Kombination mit der Summe 15: 2 Punkte</li>
       <li>Jedes Paar: 2 Punkte</li>
@@ -382,8 +384,9 @@ const SPIELE = [
     ['Runden', '<p>In der ersten Runde bekommt jeder 1 Karte, in der zweiten 2, und so weiter, bis die Karten für eine weitere Runde nicht mehr reichen. Wer möchte, zählt danach wieder herunter bis 1.</p>'],
     ['Ansagen', '<p>Links vom Geber beginnend sagt jeder, wie viele Stiche er machen wird. Der Geber sagt zuletzt an. Er darf keine Zahl nennen, bei der die Summe aller Ansagen genau die Zahl der Stiche ergibt. So geht nie für alle die Rechnung auf.</p>'],
     ['Ablauf', `<ul>
-      <li>Links vom Geber spielt aus.</li>
-      <li>Bedienpflicht: Wer die ausgespielte Farbe hat, muss sie zugeben. Sonst darf man mit Pik stechen oder eine andere Karte abwerfen.</li>
+      <li>Links vom Geber spielt aus. Wer ausspielt, darf jede Karte wählen, auch Pik.</li>
+      <li>Bedienpflicht: Wer die ausgespielte Farbe hat, muss sie zugeben. Pik darf man also nur legen, wenn Pik ausgespielt wurde oder wenn man die Farbe nicht hat.</li>
+      <li>Stechpflicht: Wer als Erster in einem Stich nicht bedienen kann, muss mit Pik stechen. Danach dürfen alle, die ebenfalls nicht bedienen können, stechen oder eine andere Karte abwerfen. Wer kein Pik hat, wirft einfach ab.</li>
       <li>Den Stich gewinnt das höchste Pik, sonst die höchste Karte der ausgespielten Farbe. Wer sticht, spielt aus.</li>
       <li>Der Geber wechselt jede Runde im Uhrzeigersinn.</li></ul>`],
     ['Wertung', `<ul>
@@ -405,7 +408,7 @@ const SPIELE = [
       <li>Vierling: 4 gleiche Werte</li>
       <li>Full House: Drilling und Paar</li>
       <li>Flush: 5 Karten einer Farbe</li>
-      <li>Straße: 5 aufeinanderfolgende Karten</li>
+      <li>Straße: 5 aufeinanderfolgende Karten. Das Ass darf oben (10 bis Ass) oder unten (Ass bis 5) stehen.</li>
       <li>Drilling: 3 gleiche Werte</li>
       <li>Zwei Paare</li>
       <li>Ein Paar</li>
@@ -413,7 +416,7 @@ const SPIELE = [
     ['Vorbereitung', '<p>Jeder bekommt gleich viel Spielgeld. Ein Spieler ist Geber, das wechselt jede Runde im Uhrzeigersinn. Links von ihm setzt einer den kleinen Pflichteinsatz (Small Blind, zum Beispiel 1), der Nächste den großen (Big Blind, zum Beispiel 2).</p>'],
     ['Ablauf einer Runde', `<ol>
       <li>Jeder bekommt 2 verdeckte Karten. Erste Setzrunde, links vom Big Blind beginnend.</li>
-      <li><b>Flop:</b> 3 gemeinsame Karten offen in die Mitte. Setzrunde.</li>
+      <li><b>Flop:</b> 3 gemeinsame Karten offen in die Mitte. Setzrunde, ab jetzt immer links vom Geber beginnend.</li>
       <li><b>Turn:</b> eine vierte Karte. Setzrunde.</li>
       <li><b>River:</b> eine fünfte Karte. Letzte Setzrunde.</li>
       <li><b>Showdown:</b> Wer noch dabei ist, deckt auf. Die beste Hand gewinnt den Pot, bei Gleichstand wird geteilt.</li></ol>`],

@@ -14,7 +14,7 @@ const CONFIG = {
       <li><b>Wie viele spielen mit?</b> Tippt die Spielerzahl an, dann seht ihr nur die Spiele, die dazu passen.</li>
       <li><b>Was spielen wir heute?</b> Wenn ihr euch nicht entscheiden könnt, entscheidet der Knopf für euch.</li>
       <li><b>Eure Hausregeln:</b> Unter jeder Anleitung ist Platz für eigene Regeln. Jede Familie spielt Mau Mau ein bisschen anders, also schreibt auf, wie ihr es macht.</li>
-      <li><b>Punktezähler:</b> Namen in Sitzreihenfolge eintragen, nach jeder Runde die Punkte. Der Zähler rechnet mit und zeigt, wer führt und wer als Nächstes gibt.</li>
+      <li><b>Punktezähler:</b> Namen in Sitzreihenfolge eintragen, sowie nach jeder Runde die Punkte. Der Zähler rechnet mit und zeigt, wer führt und wer als Nächstes gibt.</li>
       <li><b>Ehe-Bilanz:</b> Nach jedem Spiel tragt ihr ein, wer gewonnen hat. Über die Jahre kommt da einiges zusammen.</li>
       <li><b>Sicherung:</b> Spielstand und Hausregeln liegen auf dem Handy, mit dem ihr zählt. Bei einem neuen Handy nehmt ihr sie über die Sicherung mit.</li>
     </ul>

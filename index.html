@@ -134,7 +134,7 @@ function spielSeite(id) {
   </article>
   <section class="karte"><h2>Eure Hausregeln</h2>
     <p class="meta">Was ihr anders spielt, hier notieren. Es wird automatisch auf diesem Handy gespeichert.</p>
-    <textarea id="hr" rows="4" placeholder="Zum Beispiel: Bei uns darf man mit einem Buben ausgehen.">${esc(LS.get('hausregeln', {})[g.id] || '')}</textarea>
+    <textarea id="hr" rows="4" placeholder="Zum Beispiel: Bei uns darf die letzte Karte auch ein Bube sein.">${esc(LS.get('hausregeln', {})[g.id] || '')}</textarea>
     <div class="meta" id="hr-ok">&nbsp;</div></section>
   <a class="knopf" href="#/zaehler/${g.id}">Punkte zählen</a>
   <a class="knopf leise" href="#/">Zurück zur Übersicht</a>`;

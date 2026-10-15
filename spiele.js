@@ -48,14 +48,14 @@ const SPIELE = [
     ['Beliebte Hausregeln', `<ul>
       <li>9: Die Spielrichtung wechselt.</li>
       <li>Ass: Der Spieler ist noch einmal dran.</li>
-      <li>Mit einem Buben darf man nicht ausgehen.</li></ul>`]
+      <li>Die letzte Karte darf kein Bube sein.</li></ul>`]
   ]
 },
 
 {
-  id: 'skat', name: 'Skat', min: 3, max: 4, dauer: 'ab 45 Min.', art: 'Stichspiel', deck: '32 Karten',
+  id: 'skat', name: 'Skat', min: 3, max: 3, dauer: 'ab 45 Min.', art: 'Stichspiel', deck: '32 Karten',
   kurz: 'Das deutsche Kartenspiel schlechthin: einer gegen zwei, mit Reizen, Skat und viel Taktik.',
-  aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen. Zu viert setzt der Geber jeweils aus.',
+  aussortieren: 'Aus einem Deck die 2 bis 6 und die Joker entfernen.',
   zaehlerHinweis: 'Nur der Alleinspieler bekommt Punkte: gewonnen plus Spielwert, verloren minus doppelter Spielwert. Die anderen tragen 0 ein.',
   abschnitte: [
     ['Ziel', '<p>Ein Spieler spielt allein gegen die beiden anderen. Er braucht mindestens 61 der 120 Augen. Bei Null-Spielen darf er dagegen keinen einzigen Stich machen.</p>'],
@@ -94,8 +94,8 @@ const SPIELE = [
 },
 
 {
-  id: 'pik-ist-trumpf', name: 'Pik ist Trumpf', min: 4, max: 4, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '52 Karten',
-  kurz: 'Zwei Teams sagen an, wie viele Stiche sie holen, und müssen genau das schaffen. Pik sticht immer.',
+  id: 'spades', name: 'Spades', min: 4, max: 4, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '52 Karten',
+  kurz: 'Der amerikanische Klassiker für zwei Teams: ansagen, wie viele Stiche man holt, und genau das schaffen. Pik sticht immer.',
   aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
   zaehlerHinweis: 'Zwei Spalten anlegen, eine pro Team. Ansage erfüllt: 10 × Ansage plus 1 je Überstich. Verfehlt: minus 10 × Ansage.',
   abschnitte: [
@@ -159,7 +159,7 @@ const SPIELE = [
     ['Nächste Runde', `<ul>
       <li>Das Arschloch mischt, gibt und beginnt.</li>
       <li>Nach dem Geben gibt das Arschloch seine zwei besten Karten an den Präsidenten. Der Präsident gibt ihm zwei beliebige zurück.</li>
-      <li>Vize-Arschloch und Vize-Präsident tauschen genauso eine Karte.</li></ul>`],
+      <li>Vize-Arschloch und Vize-Präsident tauschen genauso, aber nur eine Karte.</li></ul>`],
     ['Beliebte Hausregeln', `<ul>
       <li>Wer genau denselben Wert wie sein Vorgänger legt, lässt den Nächsten aussetzen.</li>
       <li>Wer passt, ist für diesen Stapel raus.</li>
@@ -332,7 +332,7 @@ const SPIELE = [
     ['Ziel', '<p>Als Erstes alle eigenen Karten loswerden. Es gibt keine Reihenfolge, beide spielen gleichzeitig.</p>'],
     ['Vorbereitung', `<ul>
       <li>Jeder bekommt 20 Karten als verdeckten Nachziehstapel und nimmt davon 5 auf die Hand.</li>
-      <li>In die Mitte kommen zwei verdeckte Ersatzstapel zu je 5 Karten und dazwischen zwei Plätze für offene Karten.</li>
+      <li>In die Mitte kommen zwei verdeckte Ersatzstapel zu je 6 Karten und dazwischen zwei Plätze für offene Karten.</li>
       <li>Auf „Los“ dreht jeder gleichzeitig die oberste Karte eines Ersatzstapels auf einen der beiden Plätze.</li></ul>`],
     ['Ablauf', `<ul>
       <li>Man darf eine Karte auf einen der beiden offenen Stapel legen, wenn sie genau eins höher oder niedriger ist. Auf eine 8 passt also 7 oder 9.</li>
@@ -372,23 +372,23 @@ const SPIELE = [
 },
 
 {
-  id: 'stiche-ansagen', name: 'Stiche ansagen', min: 3, max: 6, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '52 Karten',
-  kurz: 'Wie Wizard, nur mit normalen Karten: Jede Runde vorhersagen, wie viele Stiche man genau macht.',
-  aussortieren: 'Ein ganzes Deck mit 52 Karten, ohne Joker.',
-  zaehlerHinweis: 'Richtig angesagt: 20 plus 10 je Stich. Daneben: minus 10 je Stich Abweichung.',
+  id: 'pik-ist-trumpf', name: 'Pik ist Trumpf', min: 3, max: 6, dauer: '45 bis 60 Min.', art: 'Stichspiel', deck: '32 oder 52 Karten',
+  kurz: 'Jede Runde vorhersagen, wie viele Stiche man genau macht. Pik ist immer Trumpf.',
+  aussortieren: 'Die Zahl der Karten richtet sich nach der Spielerzahl: Bei 3 oder 4 Spielern reichen 32 Karten (7 bis Ass), ab 5 Spielern alle 52. Ohne Joker.',
+  zaehlerHinweis: 'Genau getroffen: 10 plus die Zahl der Stiche. Daneben: so viele Minuspunkte, wie man danebenliegt.',
   abschnitte: [
     ['Ziel', '<p>In jeder Runde genau so viele Stiche machen, wie man angesagt hat. Nicht mehr und nicht weniger.</p>'],
-    ['Runden', '<p>In der ersten Runde bekommt jeder 1 Karte, in der zweiten 2, und so weiter bis 10. Wer möchte, zählt danach wieder herunter bis 1.</p>'],
-    ['Trumpf', '<p>Nach dem Geben wird die nächste Karte aufgedeckt. Ihre Farbe ist Trumpf. Ist keine Karte mehr übrig, gibt es keinen Trumpf.</p>'],
+    ['Kartenreihenfolge', '<p>Pik ist immer Trumpf und schlägt jede andere Farbe. In jeder Farbe gilt von hoch nach niedrig: Ass, 10, König, Dame, Bube, 9, 8 und so weiter bis zur kleinsten Karte im Spiel.</p>'],
+    ['Runden', '<p>In der ersten Runde bekommt jeder 1 Karte, in der zweiten 2, und so weiter, bis die Karten für eine weitere Runde nicht mehr reichen. Wer möchte, zählt danach wieder herunter bis 1.</p>'],
     ['Ansagen', '<p>Links vom Geber beginnend sagt jeder, wie viele Stiche er machen wird. Der Geber sagt zuletzt an. Er darf keine Zahl nennen, bei der die Summe aller Ansagen genau die Zahl der Stiche ergibt. So geht nie für alle die Rechnung auf.</p>'],
     ['Ablauf', `<ul>
-      <li>Links vom Geber spielt aus. Reihenfolge: Ass, König, Dame, Bube, 10 bis 2.</li>
-      <li>Bedienpflicht: Wer die Farbe hat, muss sie zugeben. Sonst darf man trumpfen oder abwerfen.</li>
-      <li>Den Stich gewinnt der höchste Trumpf, sonst die höchste Karte der ausgespielten Farbe. Wer sticht, spielt aus.</li>
+      <li>Links vom Geber spielt aus.</li>
+      <li>Bedienpflicht: Wer die ausgespielte Farbe hat, muss sie zugeben. Sonst darf man mit Pik stechen oder eine andere Karte abwerfen.</li>
+      <li>Den Stich gewinnt das höchste Pik, sonst die höchste Karte der ausgespielten Farbe. Wer sticht, spielt aus.</li>
       <li>Der Geber wechselt jede Runde im Uhrzeigersinn.</li></ul>`],
     ['Wertung', `<ul>
-      <li>Genau getroffen: 20 Punkte plus 10 je Stich. Wer 0 ansagt und keinen Stich macht, bekommt also 20.</li>
-      <li>Daneben: 10 Punkte Abzug je Stich Abweichung.</li></ul>`]
+      <li>Genau getroffen: 10 Punkte plus 1 Punkt je Stich. Wer 0 ansagt und keinen Stich macht, bekommt also 10.</li>
+      <li>Daneben: 1 Punkt Abzug je Stich, um den man danebenliegt. Wer 3 ansagt und 1 Stich macht, bekommt also −2.</li></ul>`]
   ]
 },
 
@@ -435,14 +435,17 @@ const SPIELE = [
     ['Ziel', '<p>Mit seinen Karten näher an 21 Punkte kommen als die Bank, ohne 21 zu überschreiten.</p>'],
     ['Werte', '<p>Ass 11, König 4, Dame 3, Bube 2, Zahlen nach Augen. Zwei Asse zählen als 21.</p>'],
     ['Ablauf', `<ul>
-      <li>Ein Spieler ist die Bank. Jeder andere setzt einen Einsatz und bekommt eine verdeckte Karte.</li>
-      <li>Reihum fragt jeder bei der Bank weitere Karten an, bis er zufrieden ist. Wer über 21 kommt, deckt auf und hat verloren.</li>
-      <li>Zum Schluss zieht die Bank für sich so lange, wie sie möchte.</li></ul>`],
+      <li>Ein Spieler ist die Bank. Jeder andere setzt einen Einsatz und bekommt von der Bank eine Karte verdeckt.</li>
+      <li>Jeder schaut sich seine Karte an, ohne sie den anderen zu zeigen. Die Karten bleiben bis zur Abrechnung geheim.</li>
+      <li>Reihum entscheidet jeder, ob er noch eine Karte will („noch eine“) oder aufhört („genug“). Auch jede weitere Karte bekommt er verdeckt und schaut sie sich allein an. Er darf so lange nachfordern, wie er möchte.</li>
+      <li>Wer über 21 kommt, deckt sofort auf und hat verloren.</li>
+      <li>Wenn alle fertig sind, zieht die Bank für sich so lange, wie sie möchte.</li></ul>`],
     ['Abrechnung', `<ul>
+      <li>Jetzt decken alle ihre Karten auf.</li>
       <li>Kommt die Bank über 21, zahlt sie allen, die noch im Spiel sind, ihren Einsatz.</li>
       <li>Sonst vergleicht sie mit jedem Spieler: Wer mehr hat, bekommt seinen Einsatz von der Bank. Bei Gleichstand oder weniger gewinnt die Bank.</li>
-      <li>Die Bank wechselt nach jeder Runde oder wenn jemand genau 21 hat.</li></ul>`],
-    ['Variante Black Jack', '<p>Mit 52 Karten: Bildkarten zählen 10, das Ass 1 oder 11. Jeder bekommt zwei Karten, die Bank muss bis 16 ziehen und ab 17 stehen bleiben. Ein Ass und eine Karte mit Wert 10 (10, Bube, Dame, König) als erste zwei Karten sind ein Black Jack und werden 3 zu 2 ausgezahlt.</p>']
+      <li>Danach wechselt die Bank reihum zum nächsten Spieler.</li></ul>`],
+    ['Variante Black Jack', '<p>Mit 52 Karten: Bildkarten zählen 10, das Ass 1 oder 11. Jeder bekommt zwei Karten, die hier offen liegen, die Bank muss bis 16 ziehen und ab 17 stehen bleiben. Ein Ass und eine Karte mit Wert 10 (10, Bube, Dame, König) als erste zwei Karten sind ein Black Jack und werden 3 zu 2 ausgezahlt.</p>']
   ]
 }
 
